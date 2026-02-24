@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { Navbar } from "@/components/common/navbar";
+
 import { AppProviders } from "@/providers/app-providers";
 
 import "./globals.css";
@@ -16,8 +18,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vicky Gupta | Portfolio",
-  description: "Personal portfolio of Vicky Gupta",
+  title: "Vicky Gupta | Software Engineer",
+  description:
+    "Personal portfolio of Vicky Gupta — Software Engineer creating with code. Skilled in Next.js, React, TypeScript, and modern web technologies.",
+  keywords: [
+    "Vicky Gupta",
+    "Software Engineer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio",
+  ],
+  authors: [{ name: "Vicky Gupta" }],
+  openGraph: {
+    title: "Vicky Gupta | Software Engineer",
+    description:
+      "Personal portfolio of Vicky Gupta — Software Engineer creating with code.",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
@@ -26,11 +45,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-clip`}
       >
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <Navbar />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );
