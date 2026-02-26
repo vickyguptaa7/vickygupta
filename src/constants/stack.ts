@@ -1,41 +1,57 @@
 import type { IconType } from "react-icons";
 import {
-  SiAmazonwebservices,
+  SiC,
+  SiCplusplus,
+  SiCss3,
   SiDocker,
-  SiFigma,
+  SiExpress,
+  SiFirebase,
   SiGit,
+  SiGithub,
+  SiHtml5,
   SiJavascript,
   SiMongodb,
-  SiNextdotjs,
+  SiMysql,
+  SiNetlify,
   SiNodedotjs,
-  SiPostgresql,
-  SiPrisma,
-  SiPython,
   SiReact,
-  SiRedis,
+  SiRedux,
+  SiRender,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+import { VscCode } from "react-icons/vsc";
 
 export interface TechItem {
   name: string;
   icon: IconType;
+  category?: string;
 }
 
 export const techStack: TechItem[] = [
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "React", icon: SiReact },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "Node.js", icon: SiNodedotjs },
-  { name: "Tailwind CSS", icon: SiTailwindcss },
-  { name: "Prisma", icon: SiPrisma },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "MongoDB", icon: SiMongodb },
-  { name: "Redis", icon: SiRedis },
-  { name: "Docker", icon: SiDocker },
-  { name: "Git", icon: SiGit },
-  { name: "Python", icon: SiPython },
-  { name: "AWS", icon: SiAmazonwebservices },
-  { name: "Figma", icon: SiFigma },
+  // Languages
+  { name: "C", icon: SiC, category: "Language" },
+  { name: "C++", icon: SiCplusplus, category: "Language" },
+  { name: "JavaScript", icon: SiJavascript, category: "Language" },
+  { name: "TypeScript", icon: SiTypescript, category: "Language" },
+  // Frontend
+  { name: "HTML5", icon: SiHtml5, category: "Frontend" },
+  { name: "CSS3", icon: SiCss3, category: "Frontend" },
+  { name: "React", icon: SiReact, category: "Frontend" },
+  { name: "Redux", icon: SiRedux, category: "Frontend" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, category: "Frontend" },
+  // Backend
+  { name: "Node.js", icon: SiNodedotjs, category: "Backend" },
+  { name: "Express", icon: SiExpress, category: "Backend" },
+  { name: "Firebase", icon: SiFirebase, category: "Backend" },
+  // Database
+  { name: "MongoDB", icon: SiMongodb, category: "Database" },
+  { name: "MySQL", icon: SiMysql, category: "Database" },
+  // Tools
+  { name: "Git", icon: SiGit, category: "Tools" },
+  { name: "GitHub", icon: SiGithub, category: "Tools" },
+  { name: "VS Code", icon: VscCode, category: "Tools" },
+  { name: "Netlify", icon: SiNetlify, category: "Tools" },
+  { name: "Docker", icon: SiDocker, category: "Tools" },
+  { name: "Render", icon: SiRender, category: "Tools" },
 ];

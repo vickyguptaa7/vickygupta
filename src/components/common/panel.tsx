@@ -41,7 +41,7 @@ interface PanelTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 export function PanelTitle({ className, children, ...props }: PanelTitleProps) {
   return (
     <h2
-      className={cn("text-3xl font-semibold tracking-tight", className)}
+      className={cn("text-2xl font-semibold tracking-tight", className)}
       {...props}
     >
       {children}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   Panel,
@@ -9,17 +9,42 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/common/panel";
+import { useThemeStore } from "@/store/theme/theme-store";
+
+interface DayData {
+  date: string;
+  count: number;
+  level: number;
+}
 
 /**
  * GitHub-style contribution heatmap.
- * Generates a 52×7 grid of cells with random contribution intensities.
+ * Fetches real data from GitHub API when configured, falls back to generated data.
+ * Colors are theme-aware.
  */
 export function GitHubHeatmapSection() {
-  const weeks = useMemo(() => generateContributionData(), []);
-  const totalContributions = useMemo(
-    () => weeks.flat().reduce((sum, d) => sum + d.count, 0),
-    [weeks],
-  );
+  const [apiWeeks, setApiWeeks] = useState<DayData[][] | null>(null);
+  const [apiTotal, setApiTotal] = useState<number | null>(null);
+  const { theme } = useThemeStore();
+
+  useEffect(() => {
+    fetch("/api/github/contributions")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.fallback && data.weeks) {
+          setApiWeeks(data.weeks);
+          setApiTotal(data.totalContributions);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const fallbackWeeks = useMemo(() => generateContributionData(), []);
+  const weeks = apiWeeks || fallbackWeeks;
+  const totalContributions =
+    apiTotal ?? weeks.flat().reduce((sum, d) => sum + d.count, 0);
+
+  const getColor = (level: number) => getContributionColor(level, theme);
 
   return (
     <Panel id="github">
@@ -41,9 +66,9 @@ export function GitHubHeatmapSection() {
                   {week.map((day, di) => (
                     <div
                       key={di}
-                      className="h-[11px] w-[11px] rounded-[2px]"
+                      className="h-[11px] w-[11px] rounded-[2px] transition-colors duration-200"
                       style={{
-                        backgroundColor: getContributionColor(day.level),
+                        backgroundColor: getColor(day.level),
                       }}
                       title={`${day.count} contributions on ${day.date}`}
                     />
@@ -56,16 +81,23 @@ export function GitHubHeatmapSection() {
           {/* Legend */}
           <div className="mt-3 flex items-center justify-between">
             <p className="text-xs text-text-muted">
-              {totalContributions.toLocaleString()} contributions in{" "}
-              {new Date().getFullYear()}
+              <a
+                href="https://github.com/vickyguptaa7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-accent"
+              >
+                {totalContributions.toLocaleString()} contributions in{" "}
+                {new Date().getFullYear()}
+              </a>
             </p>
             <div className="flex items-center gap-1.5 text-xs text-text-muted">
               <span>Less</span>
               {[0, 1, 2, 3, 4].map((level) => (
                 <div
                   key={level}
-                  className="h-[11px] w-[11px] rounded-[2px]"
-                  style={{ backgroundColor: getContributionColor(level) }}
+                  className="h-[11px] w-[11px] rounded-[2px] transition-colors duration-200"
+                  style={{ backgroundColor: getColor(level) }}
                 />
               ))}
               <span>More</span>
@@ -77,22 +109,26 @@ export function GitHubHeatmapSection() {
   );
 }
 
-function getContributionColor(level: number): string {
-  // Uses CSS variable colors — green scale
-  const colors = [
+function getContributionColor(level: number, theme: string): string {
+  // Theme-aware color scales
+  const lightColors = [
+    "var(--surface)", // 0 - empty
+    "#9be9a8", // 1
+    "#40c463", // 2
+    "#30a14e", // 3
+    "#216e39", // 4
+  ];
+
+  const darkColors = [
     "var(--surface)", // 0 - empty
     "#0e4429", // 1
     "#006d32", // 2
     "#26a641", // 3
     "#39d353", // 4
   ];
-  return colors[level] ?? colors[0];
-}
 
-interface DayData {
-  date: string;
-  count: number;
-  level: number;
+  const colors = theme === "dark" ? darkColors : lightColors;
+  return colors[level] ?? colors[0];
 }
 
 function generateContributionData(): DayData[][] {
@@ -100,7 +136,6 @@ function generateContributionData(): DayData[][] {
   const now = new Date();
   const startDate = new Date(now.getFullYear(), 0, 1);
 
-  // Generate 52 weeks
   for (let w = 0; w < 52; w++) {
     const week: DayData[] = [];
     for (let d = 0; d < 7; d++) {
@@ -110,7 +145,6 @@ function generateContributionData(): DayData[][] {
       if (date > now) {
         week.push({ date: formatDate(date), count: 0, level: 0 });
       } else {
-        // Seeded random based on date to be consistent
         const seed =
           date.getFullYear() * 10000 +
           (date.getMonth() + 1) * 100 +

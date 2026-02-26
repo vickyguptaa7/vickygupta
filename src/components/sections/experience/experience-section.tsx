@@ -40,10 +40,15 @@ export function ExperienceSection() {
                 onClick={() =>
                   setExpandedCompany(isExpanded ? null : company.company)
                 }
-                className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface"
+                aria-expanded={isExpanded}
+                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all hover:bg-surface ${
+                  isExpanded
+                    ? "border-l-2 border-l-accent"
+                    : "border-l-2 border-l-transparent"
+                }`}
               >
                 {/* Company dot indicator */}
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-edge bg-surface text-xs font-bold text-text-primary">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-xs font-bold text-text-primary">
                   {company.company.charAt(0)}
                 </div>
 
@@ -88,13 +93,13 @@ export function ExperienceSection() {
 
                           {/* Highlights */}
                           {role.highlights && (
-                            <ul className="space-y-1">
+                            <ul className="list-disc pl-4 space-y-1 marker:text-gray-400">
                               {role.highlights.map((highlight, i) => (
                                 <li
                                   key={i}
                                   className="text-xs leading-relaxed text-text-secondary"
                                 >
-                                  — {highlight}
+                                  {highlight}
                                 </li>
                               ))}
                             </ul>

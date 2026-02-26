@@ -1,0 +1,39 @@
+---
+title: "Tailwind CSS v4: What Changed and Why It Matters"
+description: "Exploring the new CSS-first configuration in Tailwind v4 and how it simplifies theme management."
+date: "2026-02-10"
+tags: ["CSS", "Tailwind CSS", "Frontend"]
+published: true
+---
+
+# Tailwind CSS v4: What Changed and Why It Matters
+
+Tailwind v4 is a significant shift from v3 — gone is the JavaScript config file, replaced by a CSS-first approach.
+
+## The New `@theme` Directive
+
+Instead of `tailwind.config.ts`, you now define your theme inline in CSS:
+
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --font-sans: var(--font-geist-sans);
+}
+```
+
+This makes it trivial to have dynamic themes (light/dark) using CSS custom properties.
+
+## Custom Utilities
+
+The `@utility` directive lets you define reusable utility classes right in your CSS:
+
+```css
+@utility screen-line-before {
+  @apply relative before:absolute before:top-0 before:h-px before:w-[200vw];
+}
+```
+
+## My Take
+
+v4 feels more "web native." Less JavaScript config, more CSS power. The migration was smooth and worth it.

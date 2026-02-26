@@ -30,7 +30,7 @@ export function CertificationsSection() {
           >
             <div className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface">
               {/* Icon */}
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-edge bg-surface text-text-muted">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted">
                 <cert.icon className="h-3.5 w-3.5" />
               </div>
 

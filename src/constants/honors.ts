@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { FiAward, FiBook } from "react-icons/fi";
+import { FiAward } from "react-icons/fi";
 
 export interface HonorItem {
   title: string;
@@ -12,18 +12,57 @@ export interface HonorItem {
 
 export const honorsData: HonorItem[] = [
   {
-    title: "Dean's List — Academic Excellence",
-    issuer: "University",
-    date: "2022",
-    description: "Recognized for outstanding academic performance.",
+    title: "Smart India Hackathon • Winner",
+    issuer: "AICTE",
+    date: "December 2023",
+    description:
+      "The winner under the problem statement given by AICTE 'Develop Online Proctored Exam Tool' Software Edition.",
+    url: "https://drive.google.com/file/d/11KpbP_f7_s7xUv2yD2q7XwloCsltZxVZ/view",
     icon: FiAward,
   },
   {
-    title: "Hackathon Winner — Best Technical Solution",
-    issuer: "TechFest",
-    date: "2023",
+    title: "Google Farewell Challenge • Global Rank 345",
+    issuer: "Google",
+    date: "April 2023",
     description:
-      "Won first place for building an innovative AI-powered application.",
+      "Secured a global rank of 345 and an all-India rank of 128 in the Round A 2023 coding competition.",
+    url: "https://drive.google.com/file/d/1Vls-iQqAV_Z84gk2UmDiO7xGHLenIl20/view?usp=drive_link",
+    icon: FiAward,
+  },
+  {
+    title: "Reply Coding Challenge • Global Rank 85",
+    issuer: "Reply",
+    date: "March 2023",
+    description:
+      "Secured a global rank of 85 in the Standard Edition coding competition (Team of 4).",
+    url: "https://drive.google.com/file/d/1hCcVpx70VVQGAvpLCL67BvqDxyJWpTyb/view?usp=drive_link",
+    icon: FiAward,
+  },
+  {
+    title: "Google Kickstart • Global Rank 383",
+    issuer: "Google",
+    date: "October 2022",
+    description:
+      "Secured a global rank of 383 and an all-India rank of 248 in Round G 2022 coding competition.",
+    url: "https://drive.google.com/file/d/1_NZhgJ3SPsAxMnO6mZPvRDtJ0m8CXy1D/view?usp=drive_link",
+    icon: FiAward,
+  },
+  {
+    title: "Smart India Hackathon • Finalist",
+    issuer: "AICTE",
+    date: "August 2022",
+    description:
+      "One of the finalists under the problem statement given by AICTE 'Graphical Password Authentication' Software Edition.",
+    url: "https://drive.google.com/file/d/1jWVyusKzGxK6Ve7g0dD28gyicBT5k0bB/view?usp=drive_link",
+    icon: FiAward,
+  },
+  {
+    title: "Google Kickstart • Global Rank 772",
+    issuer: "Google",
+    date: "May 2022",
+    description:
+      "Secured a global rank of 772 and an all-India rank of 432 in Round C 2022 coding competition.",
+    url: "https://drive.google.com/file/d/1CjDzk_xH8wRvEBywamR03bYJhRTAamZA/view?usp=drive_link",
     icon: FiAward,
   },
 ];
@@ -38,24 +77,11 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
-    title: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2023",
-    credentialUrl: "#",
-    icon: FiBook,
-  },
-  {
-    title: "Meta Front-End Developer Certificate",
-    issuer: "Meta (Coursera)",
-    date: "2023",
-    credentialUrl: "#",
-    icon: FiBook,
-  },
-  {
-    title: "Google UX Design Professional Certificate",
-    issuer: "Google (Coursera)",
-    date: "2022",
-    credentialUrl: "#",
-    icon: FiBook,
+    title: "Google Cloud Certified - Associate Cloud Engineer",
+    issuer: "Google Cloud",
+    date: "Feb 2025",
+    credentialUrl:
+      "https://www.credly.com/badges/3611dbac-6295-433c-8828-dd03255aee08/public_url",
+    icon: FiAward,
   },
 ];

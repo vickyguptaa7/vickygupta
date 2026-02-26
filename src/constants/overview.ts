@@ -21,13 +21,13 @@ export const overviewItems: OverviewItem[] = [
   {
     icon: FiBriefcase,
     label: "Role",
-    value: "Full Stack Developer",
+    value: "Software Engineer",
   },
   {
     icon: FiMapPin,
     label: "Location",
-    value: "India",
-    href: "https://www.google.com/maps/search/?api=1&query=India",
+    value: "Delhi, India",
+    href: "https://www.google.com/maps/search/?api=1&query=Delhi+India",
   },
   {
     icon: FiClock,
@@ -44,8 +44,8 @@ export const overviewItems: OverviewItem[] = [
   {
     icon: FiMail,
     label: "Email",
-    value: "hello@vickygupta.dev",
-    href: "mailto:hello@vickygupta.dev",
+    value: "vickyguptaa7@gmail.com",
+    href: "mailto:vickyguptaa7@gmail.com",
   },
   {
     icon: FiUser,

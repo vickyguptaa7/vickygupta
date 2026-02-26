@@ -1,7 +1,6 @@
 import type { IconType } from "react-icons";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FiMail } from "react-icons/fi";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
+import { FaSquareXTwitter, FaXTwitter } from "react-icons/fa6";
 
 export interface SocialLink {
   name: string;
@@ -11,23 +10,23 @@ export interface SocialLink {
 
 export const socialLinks: SocialLink[] = [
   {
-    name: "GitHub",
-    url: "https://github.com/vickygupta",
-    icon: FaGithub,
-  },
-  {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/vickygupta",
+    url: "https://www.linkedin.com/in/vickyguptaa7/",
     icon: FaLinkedin,
   },
   {
-    name: "X (Twitter)",
-    url: "https://x.com/vickygupta",
-    icon: FaXTwitter,
+    name: "GitHub",
+    url: "https://github.com/vickyguptaa7/",
+    icon: FaGithubSquare,
   },
+  // {
+  //   name: "Email",
+  //   url: "mailto:vickyguptaa7@gmail.com",
+  //   icon: FiMail,
+  // },
   {
-    name: "Email",
-    url: "mailto:hello@vickygupta.dev",
-    icon: FiMail,
+    name: "X (Twitter)",
+    url: "https://x.com/vickyguptaa7",
+    icon: FaSquareXTwitter,
   },
 ];

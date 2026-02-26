@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* === screen-line utilities (full-width horizontal lines) === */
 @utility screen-line-before {
@@ -29,8 +30,8 @@
   --border-subtle: #f4f4f5;
 
   /* Accent */
-  --accent: #2563eb;
-  --accent-muted: #dbeafe;
+  --accent: #18181b;
+  --accent-muted: #f4f4f5;
 }
 
 /* === Dark theme === */
@@ -49,8 +50,8 @@
   --edge: color-mix(in srgb, #27272a 64%, #09090b);
   --border-subtle: #18181b;
 
-  --accent: #3b82f6;
-  --accent-muted: #172554;
+  --accent: #fafafa;
+  --accent-muted: #27272a;
 }
 
 /* === Map to Tailwind v4 theme === */
@@ -79,9 +80,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling & stable scrollbar gutter to prevent layout shift */
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 /* Selection color */
@@ -119,4 +121,94 @@ html {
 * {
   scrollbar-width: auto;
   scrollbar-color: var(--border) transparent;
+}
+
+/* Hide scrollbar for horizontal-scroll navs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Hero Section Micro-Interactions ─── */
+
+/* Animated gradient ring around avatar — outer spinning ring */
+.hero-avatar-ring {
+  background: conic-gradient(
+    from var(--hero-ring-angle, 0deg),
+    #3b82f6 0%,
+    #06b6d4 15%,
+    #10b981 30%,
+    transparent 50%,
+    #10b981 70%,
+    #06b6d4 85%,
+    #3b82f6 100%
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2.5px),
+    #000 calc(100% - 2.5px)
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 2.5px),
+    #000 calc(100% - 2.5px)
+  );
+  animation: hero-ring-spin 3s linear infinite;
+  transition:
+    filter 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.hero-avatar-ring:hover {
+  filter: brightness(1.2);
+}
+
+@keyframes hero-ring-spin {
+  to {
+    --hero-ring-angle: 360deg;
+  }
+}
+
+@property --hero-ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Status dot ping */
+.hero-status-ping {
+  animation: hero-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes hero-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Name underline reveal on hover */
+.hero-name-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--text-primary), var(--text-muted));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .hero-name-underline::after {
+  transform: scaleX(1);
 }

@@ -12,26 +12,18 @@ export interface Education {
 export const educationData: Education[] = [
   {
     id: "1",
-    institution: "University Name",
-    institutionUrl: "https://university.edu",
-    degree: "B.Tech in Computer Science & Engineering",
-    period: "08.2019 – 06.2023",
-    grade: "8.5 CGPA",
-    highlights: [
-      "Specialized in Data Structures, Algorithms, and Software Engineering",
-      "Led the university's coding club and organized hackathons",
-      "Published research on efficient web rendering techniques",
-    ],
+    institution: "Jamia Millia Islamia, New Delhi",
+    institutionUrl: "https://www.jmi.ac.in/",
+    degree: "B.Tech, Computer Engineering",
+    period: "2020 – 2024",
+    grade: "9.87 CGPA",
+    isActive: false,
   },
   {
     id: "2",
-    institution: "Higher Secondary School",
-    degree: "Class XII — Science (PCM + CS)",
-    period: "04.2017 – 03.2019",
-    grade: "92%",
-    highlights: [
-      "School topper in Computer Science",
-      "Participated in national-level olympiads",
-    ],
+    institution: "Oxford Public School, New Delhi",
+    degree: "Intermediate, Science Stream",
+    period: "2018 – 2020",
+    grade: "94.8%",
   },
 ];

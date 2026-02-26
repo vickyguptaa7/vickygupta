@@ -1,7 +1,10 @@
 import { Footer } from "@/components/common/footer";
+import { ScrollReveal } from "@/components/common/scroll-reveal";
+import { SectionNav } from "@/components/common/section-nav";
 import { Separator } from "@/components/common/separator";
 import { AboutSection } from "@/components/sections/about/about-section";
 import { CertificationsSection } from "@/components/sections/certifications/certifications-section";
+import { CodingProfilesSection } from "@/components/sections/coding-profiles/coding-profiles-section";
 import { ContactSection } from "@/components/sections/contact/contact-section";
 import { EducationSection } from "@/components/sections/education/education-section";
 import { ExperienceSection } from "@/components/sections/experience/experience-section";
@@ -9,46 +12,76 @@ import { GitHubHeatmapSection } from "@/components/sections/github-heatmap/githu
 import { HeroSection } from "@/components/sections/hero/hero-section";
 import { HonorsSection } from "@/components/sections/honors/honors-section";
 import { ProjectsSection } from "@/components/sections/projects/projects-section";
-import { SocialLinksSection } from "@/components/sections/social-links/social-links-section";
 import { StackSection } from "@/components/sections/stack/stack-section";
 
 export default function Home() {
   return (
-    <main className="w-full overflow-x-hidden">
-      <div className="mx-auto md:max-w-3xl">
-        <HeroSection />
-        <SocialLinksSection />
-        <Separator />
+    <>
+      <SectionNav />
+      <main id="main-content" className="w-full overflow-x-hidden pt-12 mt-4">
+        <div className="mx-auto md:max-w-3xl">
+          <HeroSection />
+          <Separator />
 
-        <AboutSection />
-        <div className="flex h-4 w-full border-x border-edge" />
+          <ScrollReveal>
+            <AboutSection />
+          </ScrollReveal>
+          <Separator />
 
-        <GitHubHeatmapSection />
-        <Separator />
+          <ScrollReveal delay={0.05}>
+            <CodingProfilesSection />
+          </ScrollReveal>
+          <div className="flex h-2 w-full border-x border-edge" />
 
-        <StackSection />
-        <Separator />
+          <ScrollReveal delay={0.05}>
+            <GitHubHeatmapSection />
+          </ScrollReveal>
+          <Separator />
 
-        <ExperienceSection />
-        <Separator />
+          <ScrollReveal>
+            <StackSection />
+          </ScrollReveal>
+          <Separator />
 
-        <EducationSection />
-        <Separator />
+          <ScrollReveal>
+            <ExperienceSection />
+          </ScrollReveal>
+          <Separator />
 
-        <ProjectsSection />
-        <Separator />
+          <ScrollReveal delay={0.05}>
+            <EducationSection />
+          </ScrollReveal>
+          <Separator />
 
-        <HonorsSection />
-        <Separator />
+          <ScrollReveal>
+            <ProjectsSection />
+          </ScrollReveal>
+          <Separator />
 
-        <CertificationsSection />
-        <Separator />
+          {/* <ScrollReveal delay={0.05}>
+            <BlogSection />
+          </ScrollReveal>
+          <Separator /> */}
 
-        <ContactSection />
-        <Separator />
+          <ScrollReveal>
+            <HonorsSection />
+          </ScrollReveal>
+          <Separator />
 
-        <Footer />
-      </div>
-    </main>
+          <ScrollReveal delay={0.05}>
+            <CertificationsSection />
+          </ScrollReveal>
+          <Separator />
+
+          <ScrollReveal>
+            <ContactSection />
+          </ScrollReveal>
+          <Separator />
+
+          <Footer />
+          <Separator />
+        </div>
+      </main>
+    </>
   );
 }

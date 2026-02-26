@@ -30,7 +30,7 @@ export function HonorsSection() {
           >
             <div className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface">
               {/* Icon */}
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-edge bg-surface text-text-muted">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted">
                 <honor.icon className="h-3.5 w-3.5" />
               </div>
 
@@ -43,9 +43,11 @@ export function HonorsSection() {
                   {honor.issuer} · {honor.date}
                 </p>
                 {honor.description && (
-                  <p className="mt-1 text-xs text-text-secondary">
-                    — {honor.description}
-                  </p>
+                  <ul className="mt-1 list-disc pl-4 marker:text-gray-400">
+                    <li className="text-xs text-text-secondary">
+                      {honor.description}
+                    </li>
+                  </ul>
                 )}
               </div>
 

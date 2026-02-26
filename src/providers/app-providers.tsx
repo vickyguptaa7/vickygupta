@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
+import { PageTransitionProvider } from "@/components/common/page-transition";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 interface AppProvidersProps {
@@ -25,7 +26,9 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <PageTransitionProvider>{children}</PageTransitionProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

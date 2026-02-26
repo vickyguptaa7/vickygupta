@@ -19,13 +19,16 @@ export function AboutSection() {
         className="space-y-4"
       >
         {/* Bio paragraphs */}
-        <motion.div variants={staggerItem} className="space-y-3">
+        <motion.ul
+          variants={staggerItem}
+          className="list-disc pl-4 space-y-3 marker:text-gray-400 font-mono"
+        >
           {aboutData.bio.map((paragraph, i) => (
-            <p key={i} className="text-sm leading-relaxed text-text-secondary">
-              — {paragraph}
-            </p>
+            <li key={i} className="text-sm leading-relaxed text-text-secondary">
+              {paragraph}
+            </li>
           ))}
-        </motion.div>
+        </motion.ul>
 
         {/* Featured Projects */}
         {aboutData.featuredProjects &&
@@ -41,7 +44,7 @@ export function AboutSection() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between rounded-md border border-edge px-3 py-2.5 text-sm transition-colors hover:bg-surface"
+                    className="flex items-center justify-between rounded-md border border-edge px-3 py-2.5 text-sm transition-all hover:bg-surface hover:border-accent/30 group"
                   >
                     <span className="font-medium text-text-primary">
                       {project.name}

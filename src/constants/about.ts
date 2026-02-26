@@ -1,16 +1,18 @@
 export const aboutData = {
   bio: [
-    "Full Stack Developer with a passion for building polished, pixel-perfect web applications with strong attention to small details.",
-    "Skilled in Next.js, React, TypeScript, and modern front-end technologies. Experienced in building scalable applications and component libraries.",
-    "Passionate about exploring new technologies and turning ideas into reality through well-crafted personal projects.",
+    "I'm Vicky Gupta, a passionate software engineer from Delhi, 🇮🇳India, with a strong background in competitive programming and software development.",
+    "At AlgoSec and AlgoZenith, I've focused on enhancing platform performance and developing innovative features, always striving to improve and deliver impactful solutions.",
+    "Skilled in React, Next.js, TypeScript, and modern web technologies. Experienced in building scalable applications and solving complex algorithmic problems.",
   ],
   featuredProjects: [
     {
-      name: "CareerZenith",
-      url: "https://careerzenith.com",
+      name: "Code Verse",
+      url: "https://code-verse-app.netlify.app/",
       description:
-        "AI-powered resume builder with job optimization analysis and ATS scoring.",
-      stats: [{ label: "users", value: "500+" }],
+        "Online code editor and compiler supporting Java, C++, Python and more.",
+      stats: [{ label: "languages", value: "5+" }],
     },
   ],
+  resumeLink:
+    "https://drive.google.com/file/d/1XY3laHq5E781TUEJ6apap02qkwQRonGT/view?usp=drive_link",
 } as const;

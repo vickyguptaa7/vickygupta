@@ -1,47 +1,58 @@
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   url: string;
+  githubUrl?: string;
   description: string;
   highlights?: string[];
   technologies: string[];
+  screenshot?: string; // Path to screenshot in public/images/projects/
+  featured?: boolean;
+  status?: "live" | "building" | "archived";
 }
 
 export const projects: Project[] = [
   {
     id: "1",
-    title: "CareerZenith",
-    url: "https://careerzenith.com",
+    slug: "code-verse",
+    title: "Code Verse",
+    url: "https://code-verse-app.netlify.app/",
+    githubUrl: "https://github.com/vickyguptaa7/Code-Verse",
     description:
-      "AI-powered resume builder with job optimization, ATS scoring, and real-time collaboration. Helps users craft perfect resumes tailored to specific job descriptions.",
+      "CodeVerse, an online code editor and compiler designed to support various programming languages including Java, C++, Python, and more.",
     highlights: [
-      "AI-driven keyword analysis and resume optimization",
-      "Real-time collaboration and version history",
-      "500+ active users",
+      "Multiple tabs for editing multiple files simultaneously",
+      "Integrated terminal with online compilation",
+      "Search and replace functionality with code folding",
+      "Import/download files and folders from local system",
+      "Autocomplete suggestions and multiple language support",
+      "Persistent storage of files and folders",
     ],
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Prisma",
-      "PostgreSQL",
-      "OpenAI",
-    ],
+    technologies: ["ReactJs", "Tailwind CSS", "Node.js", "Docker", "Firebase"],
+    screenshot: "/images/projects/codeverse.png",
+    featured: true,
+    status: "live",
   },
   {
     id: "2",
-    title: "Portfolio",
-    url: "https://vickygupta.dev",
+    slug: "scribble-verse",
+    title: "Scribble Verse",
+    url: "https://vickyguptaa7.github.io/Scribble-Verse/",
+    githubUrl: "https://github.com/vickyguptaa7/WhiteBoard",
     description:
-      "Personal portfolio website built with Next.js 16, featuring clean bento-box design, dark/light mode, and scroll-triggered animations.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
-  },
-  {
-    id: "3",
-    title: "DevTools Dashboard",
-    url: "https://github.com/vickygupta/devtools-dashboard",
-    description:
-      "A developer productivity dashboard aggregating GitHub activity, deployment status, and project metrics into a single view.",
-    technologies: ["React", "Node.js", "Docker", "Redis", "Chart.js"],
+      "Whiteboard, a digital tool that emulates the functionality of a physical whiteboard. Users can draw, write, and take notes in a digital format.",
+    highlights: [
+      "Pen with color and size adjustment",
+      "Eraser with size adjustment",
+      "Background color change of the whiteboard",
+      "Shapes like line, rectangle, circle to draw",
+      "Undo, Redo, Clear the whiteboard drawing",
+      "Dark and light mode with save/load from local storage",
+    ],
+    technologies: ["JavaScript", "HTML", "Tailwind CSS"],
+    screenshot: "/images/projects/scribbleverse.png",
+    featured: true,
+    status: "live",
   },
 ];

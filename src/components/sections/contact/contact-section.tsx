@@ -21,10 +21,10 @@ export function ContactSection() {
 
         <a
           href="mailto:hello@vickygupta.dev"
-          className="inline-flex items-center gap-2 rounded-md border border-edge px-4 py-2.5 text-sm font-medium text-text-primary transition-colors hover:bg-surface"
+          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:bg-accent/90 active:scale-[0.98] shadow-sm"
         >
           <FiMail className="h-4 w-4" />
-          hello@vickygupta.dev
+          Get in touch
         </a>
       </motion.div>
     </Section>

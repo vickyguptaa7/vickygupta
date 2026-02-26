@@ -1,0 +1,49 @@
+---
+title: "Building a Modern Portfolio with Next.js 16"
+description: "A deep dive into creating a performant, animated portfolio using Next.js 16, Tailwind CSS v4, and Motion."
+date: "2026-02-20"
+tags: ["Next.js", "React", "Tailwind CSS"]
+published: true
+---
+
+# Building a Modern Portfolio with Next.js 16
+
+When I set out to rebuild my portfolio, I wanted something that felt **polished** but not over-engineered. Here's what I learned along the way.
+
+## The Stack
+
+- **Next.js 16** with App Router for the framework
+- **Tailwind CSS v4** for styling (the new CSS-first config is amazing)
+- **Motion** (formerly Framer Motion) for animations
+- **Zustand** for theme state management
+
+## Key Design Decisions
+
+### Clean Panel System
+
+I built a reusable `Panel` component that creates consistent border rails and full-width horizontal lines. This gives the portfolio its structured, almost editorial feel.
+
+```tsx
+export function Panel({ className, children }: PanelProps) {
+  return (
+    <section
+      className={cn(
+        "screen-line-before screen-line-after border-x border-edge",
+        className,
+      )}
+    >
+      {children}
+    </section>
+  );
+}
+```
+
+### Scroll-Triggered Animations
+
+Every section fades in as you scroll, using Motion's `whileInView` with `viewport={{ once: true }}` to fire only once.
+
+## What's Next
+
+I'm planning to add a blog section (you're reading it!), real GitHub contribution data, and more interactive elements.
+
+Stay tuned for more posts about web development and design.
