@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FiExternalLink } from "react-icons/fi";
+import Image from "next/image";
+import { FiArrowUpRight } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
 
@@ -28,10 +29,28 @@ export function CertificationsSection() {
             variants={staggerItem}
             className="screen-line-after"
           >
-            <div className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface">
-              {/* Icon */}
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted">
-                <cert.icon className="h-3.5 w-3.5" />
+            <a
+              href={cert.credentialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface"
+              aria-label={`View ${cert.title} credential`}
+            >
+              {/* Icon / Logo */}
+              <div className="border border-edge rounded-[7px] p-px group-hover:border-black/10 transition-colors">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted overflow-hidden group-hover:border-black/10 transition-colors">
+                  {cert.logo ? (
+                    <Image
+                      src={cert.logo}
+                      alt={`${cert.issuer} logo`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <cert.icon className="h-3.5 w-3.5" />
+                  )}
+                </div>
               </div>
 
               {/* Content */}
@@ -46,17 +65,9 @@ export function CertificationsSection() {
 
               {/* Credential link */}
               {cert.credentialUrl && (
-                <a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
-                  aria-label={`View ${cert.title} credential`}
-                >
-                  <FiExternalLink className="h-3.5 w-3.5" />
-                </a>
+                <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-black group-hover:opacity-100 group-hover:rotate-45 duration-300" />
               )}
-            </div>
+            </a>
           </motion.div>
         ))}
       </motion.div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FiExternalLink } from "react-icons/fi";
+import Image from "next/image";
+import { FiArrowUpRight } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
 
@@ -28,10 +29,27 @@ export function HonorsSection() {
             variants={staggerItem}
             className="screen-line-after"
           >
-            <div className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface">
-              {/* Icon */}
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted">
-                <honor.icon className="h-3.5 w-3.5" />
+            <a
+              href={honor.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface"
+            >
+              {/* Icon / Logo */}
+              <div className="border border-edge rounded-[7px] p-px group-hover:border-black/10 transition-colors">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted overflow-hidden group-hover:border-black/10 transition-colors">
+                  {honor.logo ? (
+                    <Image
+                      src={honor.logo}
+                      alt={`${honor.issuer} logo`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <honor.icon className="h-3.5 w-3.5" />
+                  )}
+                </div>
               </div>
 
               {/* Content */}
@@ -43,7 +61,7 @@ export function HonorsSection() {
                   {honor.issuer} · {honor.date}
                 </p>
                 {honor.description && (
-                  <ul className="mt-1 list-disc pl-4 marker:text-gray-400">
+                  <ul className="mt-1 marker:text-gray-400">
                     <li className="text-xs text-text-secondary">
                       {honor.description}
                     </li>
@@ -53,16 +71,9 @@ export function HonorsSection() {
 
               {/* Link */}
               {honor.url && (
-                <a
-                  href={honor.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
-                >
-                  <FiExternalLink className="h-3.5 w-3.5" />
-                </a>
+                <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-black group-hover:opacity-100 group-hover:rotate-45 duration-300" />
               )}
-            </div>
+            </a>
           </motion.div>
         ))}
       </motion.div>

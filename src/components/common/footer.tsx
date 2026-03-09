@@ -36,7 +36,10 @@ export function Footer() {
               className="flex h-8 w-8 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface hover:text-text-primary"
               aria-label={link.name}
             >
-              <link.icon size={14} />
+              <link.icon
+                size={20}
+                className="border border-edge hover:border-black/30 transition-colors rounded-sm"
+              />
             </a>
           ))}
         </div>

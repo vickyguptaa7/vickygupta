@@ -58,7 +58,12 @@ export function SocialLinksSection() {
                 index % 3 == 2 && "border-r-0",
               )}
             >
-              <link.icon className="h-6 w-6 border border-edge shrink-0 text-text-primary" />
+              <link.icon
+                className={cn(
+                  "h-6 w-6 border border-edge rounded-sm shrink-0 group-hover:border-black/40  transition-colors",
+                  link.iconColor || "text-text-primary",
+                )}
+              />
               <span className="text-text-primary font-medium hero-name-underline relative">
                 {link.name}
               </span>

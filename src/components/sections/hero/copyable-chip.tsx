@@ -35,14 +35,14 @@ export function CopyableChip({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.04 }}
-      className="group/chip inline-flex items-center gap-1.5 border border-edge bg-surface/50 px-2.5 py-1 text-xs text-text-secondary transition-colors"
+      className="group/chip inline-flex items-center gap-1.5 border border-edge bg-surface/50 px-2.5 py-1 text-xs text-text-secondary transition-colors group"
     >
       <a
         href={href}
         className="inline-flex items-center gap-1.5 hover:text-text-primary transition-colors"
         target={target}
       >
-        <Icon className="h-3.5 w-3.5 text-text-muted" />
+        <Icon className="h-3.5 w-3.5 text-text-muted group-hover:text-text-primary" />
         {value}
       </a>
       <button
@@ -69,8 +69,9 @@ export function CopyableChip({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.15 }}
+              className="group/cpy"
             >
-              <FiCopy className="h-3 w-3 text-text-muted" />
+              <FiCopy className="h-3 w-3 text-text-muted group-hover/cpy:text-text-primary transition-colors" />
             </motion.span>
           )}
         </AnimatePresence>

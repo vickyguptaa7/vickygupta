@@ -59,7 +59,7 @@ export function HeroSection() {
             <div className="flex flex-wrap items-center gap-2 p-4">
               <InfoChip>
                 <BsCodeSlash
-                  className="h-3.5 w-3.5 text-text-muted"
+                  className="h-3.5 w-3.5 text-text-muted group-hover:text-text-primary transition-colors"
                   strokeWidth={"0.6"}
                 />
                 {heroData.role}
@@ -72,15 +72,17 @@ export function HeroSection() {
                 delay={0.05}
               />
               <InfoChip>
-                <IoLocationOutline className="h-3.5 w-3.5 text-text-muted" />
+                <IoLocationOutline className="h-3.5 w-3.5 text-text-muted group-hover:text-text-primary transition-colors" />
                 {heroData.location}
               </InfoChip>
               <InfoChip delay={0.15}>
-                <FiClock className="h-3.5 w-3.5 text-text-muted" />
+                <FiClock className="h-3.5 w-3.5 text-text-muted group-hover:text-text-primary transition-colors" />
                 <LiveClock />
               </InfoChip>
               <InfoChip>
-                <span className="text-text-muted">{heroData.pronouns}</span>
+                <span className=" group-hover:text-text-primary transition-colors">
+                  {heroData.pronouns}
+                </span>
               </InfoChip>
             </div>
           </div>

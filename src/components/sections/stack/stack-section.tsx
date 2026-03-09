@@ -21,10 +21,13 @@ export function StackSection() {
           <motion.div
             key={tech.name}
             variants={staggerItem}
-            className="group relative flex items-center gap-2 rounded-md border border-edge px-2.5 py-2 transition-all hover:bg-surface hover:border-accent/30 hover:scale-105"
+            className="group relative flex items-center gap-2 border border-edge px-2 py-1.5 transition-all bg-surface/50 hover:border-accent/10 hover:scale-105"
           >
-            <tech.icon className="h-4 w-4 shrink-0" />
-            <span className="text-xs font-medium text-text-secondary group-hover:text-text-primary transition-colors">
+            <tech.icon
+              className="h-3.5 w-3.5 shrink-0"
+              style={{ color: tech.color }}
+            />
+            <span className="text-xs font-medium text-text-secondary group-hover:text-text-primary transition-colors font-mono">
               {tech.name}
             </span>
           </motion.div>

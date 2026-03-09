@@ -1,3 +1,8 @@
+import { StaticImageData } from "next/image";
+
+import algosecLogo from "@/assets/images/experience/algosec.jpg";
+import algozenithLogo from "@/assets/images/experience/algozenith.jpeg";
+
 export interface ExperienceRole {
   title: string;
   type: "Full-time" | "Part-time" | "Contract" | "Freelance" | "Internship";
@@ -11,6 +16,7 @@ export interface Experience {
   id: string;
   company: string;
   companyUrl?: string;
+  logo?: StaticImageData;
   isActive?: boolean;
   roles: ExperienceRole[];
 }
@@ -20,6 +26,7 @@ export const experiences: Experience[] = [
     id: "1",
     company: "AlgoSec",
     companyUrl: "https://www.algosec.com/products/algosec-cloud",
+    logo: algosecLogo,
     isActive: true,
     roles: [
       {
@@ -47,6 +54,7 @@ export const experiences: Experience[] = [
     id: "2",
     company: "AlgoZenith",
     companyUrl: "https://maang.in/premium",
+    logo: algozenithLogo,
     roles: [
       {
         title: "Software Engineer Intern",

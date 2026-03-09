@@ -1,3 +1,8 @@
+import { StaticImageData } from "next/image";
+
+import codeVerseIcon from "@/assets/images/projects/codeverse-icon.svg";
+import whiteboardIcon from "@/assets/images/projects/whiteboard-icon.png";
+
 export interface Project {
   id: string;
   slug: string;
@@ -8,6 +13,7 @@ export interface Project {
   highlights?: string[];
   technologies: string[];
   screenshot?: string; // Path to screenshot in public/images/projects/
+  icon?: StaticImageData;
   featured?: boolean;
   status?: "live" | "building" | "archived";
 }
@@ -31,8 +37,9 @@ export const projects: Project[] = [
     ],
     technologies: ["ReactJs", "Tailwind CSS", "Node.js", "Docker", "Firebase"],
     screenshot: "/images/projects/codeverse.png",
-    featured: true,
-    status: "live",
+    icon: codeVerseIcon,
+    // featured: true,
+    // status: "live",
   },
   {
     id: "2",
@@ -52,7 +59,8 @@ export const projects: Project[] = [
     ],
     technologies: ["JavaScript", "HTML", "Tailwind CSS"],
     screenshot: "/images/projects/scribbleverse.png",
-    featured: true,
-    status: "live",
+    icon: whiteboardIcon,
+    // featured: true,
+    // status: "live",
   },
 ];

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
@@ -30,14 +31,24 @@ export function CodingProfilesSection() {
             target="_blank"
             rel="noopener noreferrer"
             variants={staggerItem}
-            className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-surface screen-line-after ${
+            className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-surface screen-line-after group ${
               index % 2 === 0 ? "sm:border-r sm:border-edge" : ""
             }`}
           >
             {/* Platform Icon */}
-            <div className="border border-edge group-hover:border-accent/10">
-              <div className="flex h-9 w-9 m-px shrink-0 items-center justify-center border border-edge bg-surface transition-colors group-hover:border-accent/10">
-                <profile.icon className="h-5 w-5 text-text-primary" />
+            <div className="border border-edge rounded-[7px] group-hover:border-black/10 transition-colors">
+              <div className="flex h-9 w-9 m-px shrink-0 items-center justify-center border border-edge bg-surface transition-colors overflow-hidden rounded-md group-hover:border-black/10 ">
+                {profile.logo ? (
+                  <Image
+                    src={profile.logo}
+                    alt={`${profile.platform} logo`}
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                ) : (
+                  <profile.icon className="h-5 w-5 text-text-primary" />
+                )}
               </div>
             </div>
 
@@ -59,10 +70,10 @@ export function CodingProfilesSection() {
                   </span>
                 )}
               </div>
-              <p className="text-xs text-text-muted">
+              <p className="text-xs text-text-muted group-hover:text-text-secondary transition-colors">
                 @{profile.handle}
                 {profile.rank && (
-                  <span className="ml-1.5 text-text-muted">
+                  <span className="ml-1.5 text-text-muted group-hover:text-text-secondary transition-colors">
                     · {profile.rank}
                   </span>
                 )}

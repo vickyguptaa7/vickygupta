@@ -1,7 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import Image from "next/image";
+import { useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   FiArrowRight,
   FiChevronDown,
@@ -16,9 +18,30 @@ import { TechBadge } from "@/components/common/tech-badge";
 import { staggerContainer, staggerItem } from "@/constants/animation-presets";
 import { projects } from "@/constants/projects";
 
+interface HoveredAction {
+  label: string;
+  x: number;
+  y: number;
+}
+
 export function ProjectsSection() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<HoveredAction | null>(null);
   const { navigate } = usePageTransition();
+
+  const handleIconHover = useCallback(
+    (label: string, e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      setHovered({
+        label,
+        x: rect.left + rect.width / 2,
+        y: rect.top,
+      });
+    },
+    [],
+  );
+
+  const handleIconLeave = useCallback(() => setHovered(null), []);
 
   return (
     <Section
@@ -40,25 +63,35 @@ export function ProjectsSection() {
             <motion.div
               key={project.id}
               variants={staggerItem}
-              className="screen-line-after"
+              className="screen-line-after group/btn transition-colors hover:bg-surface"
             >
               {/* Project header - clickable */}
               <button
                 onClick={() => setExpandedId(isExpanded ? null : project.id)}
-                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all hover:bg-surface ${
-                  isExpanded
-                    ? "border-l-2 border-l-accent"
-                    : "border-l-2 border-l-transparent"
-                }`}
+                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all group/btn`}
               >
-                {/* Initial avatar */}
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-xs font-bold text-text-primary">
-                  {project.title.charAt(0)}
+                {/* Project icon / Initial avatar */}
+                <div className="border border-edge rounded-[7px] p-px group-hover/btn:border-black/10 transition-colors">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface overflow-hidden group-hover/btn:border-black/10 transition-colors">
+                    {project.icon ? (
+                      <Image
+                        src={project.icon}
+                        alt={`${project.title} icon`}
+                        width={20}
+                        height={20}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <span className="text-xs font-bold text-text-primary">
+                        {project.title.charAt(0)}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-text-primary">
+                    <p className="text-sm font-medium text-text-primary hero-name-underline relative w-fit">
                       {project.title}
                     </p>
                     {project.featured && (
@@ -92,15 +125,59 @@ export function ProjectsSection() {
                             : "Archived"}
                       </span>
                     )}
+
+                    {/* Action icons */}
+                    <div className="flex items-center gap-1 ml-auto">
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/projects/${project.slug}`);
+                        }}
+                        onMouseEnter={(e) => handleIconHover("View details", e)}
+                        onMouseLeave={handleIconLeave}
+                        className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary cursor-pointer"
+                      >
+                        <FiArrowRight className="h-3.5 w-3.5" />
+                      </span>
+
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          onMouseEnter={(e) =>
+                            handleIconHover("View source on GitHub", e)
+                          }
+                          onMouseLeave={handleIconLeave}
+                          className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+                        >
+                          <FiGithub className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+
+                      {project.url && (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          onMouseEnter={(e) =>
+                            handleIconHover("Visit live site", e)
+                          }
+                          onMouseLeave={handleIconLeave}
+                          className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+                        >
+                          <FiExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <p className="text-xs text-text-muted truncate">
-                    {project.description}
-                  </p>
                 </div>
 
                 {/* Expand indicator */}
                 <FiChevronDown
-                  className={`h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 ${
+                  className={`h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 group-hover/btn:text-black ${
                     isExpanded ? "rotate-180" : ""
                   }`}
                 />
@@ -116,7 +193,7 @@ export function ProjectsSection() {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="border-t border-edge px-4 py-3 space-y-3">
+                    <div className=" px-4 pb-4 space-y-3">
                       {/* Full description */}
                       <p className="text-xs leading-relaxed text-text-secondary">
                         {project.description}
@@ -135,55 +212,56 @@ export function ProjectsSection() {
                           ))}
                         </ul>
                       )}
-
-                      {/* Tech chips */}
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {project.technologies.map((tech) => (
-                          <TechBadge key={tech} name={tech} />
-                        ))}
-                      </div>
-
-                      {/* Action buttons */}
-                      <div className="flex items-center gap-2 pt-2">
-                        <button
-                          onClick={() => navigate(`/projects/${project.slug}`)}
-                          className="inline-flex items-center gap-1.5 border border-edge bg-surface px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:bg-surface-hover hover:border-border active:scale-[0.98]"
-                          aria-label={`View details for ${project.title}`}
-                        >
-                          View details
-                          <FiArrowRight className="h-3 w-3" />
-                        </button>
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-surface hover:text-text-primary active:scale-[0.98]"
-                            aria-label={`View source code for ${project.title} on GitHub`}
-                          >
-                            <FiGithub className="h-3 w-3" />
-                            Source
-                          </a>
-                        )}
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-surface hover:text-text-primary active:scale-[0.98]"
-                          aria-label={`Visit ${project.title} live site`}
-                        >
-                          <FiExternalLink className="h-3 w-3" />
-                          Visit
-                        </a>
-                      </div>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
+
+              {/* Tech badges - always visible */}
+              <div className="flex flex-wrap gap-1 px-4 pb-3 -mt-1">
+                {project.technologies.map((tech) => (
+                  <TechBadge key={tech} name={tech} />
+                ))}
+              </div>
             </motion.div>
           );
         })}
       </motion.div>
+
+      {/* Tooltip rendered via portal to escape overflow containers */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {hovered && (
+              <div
+                className="pointer-events-none fixed z-9999"
+                style={{
+                  left: hovered.x,
+                  top: hovered.y,
+                  transform: "translate(-50%, -100%)",
+                }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                >
+                  <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-xs shadow-lg">
+                    <span className="font-medium text-text-primary">
+                      {hovered.label}
+                    </span>
+                    {/* Caret */}
+                    <div className="absolute left-1/2 -bottom-1.25 -translate-x-1/2">
+                      <div className="h-1.5 w-1.5 rotate-45 border-b border-r border-edge bg-background" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
     </Section>
   );
 }

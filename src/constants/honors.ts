@@ -1,5 +1,10 @@
+import { StaticImageData } from "next/image";
 import type { IconType } from "react-icons";
 import { FiAward } from "react-icons/fi";
+
+import googleLogo from "@/assets/images/awards/google.png";
+import replyLogo from "@/assets/images/awards/reply.png";
+import sihLogo from "@/assets/images/awards/sih.png";
 
 export interface HonorItem {
   title: string;
@@ -8,6 +13,7 @@ export interface HonorItem {
   description?: string;
   url?: string;
   icon: IconType;
+  logo?: StaticImageData;
 }
 
 export const honorsData: HonorItem[] = [
@@ -19,6 +25,7 @@ export const honorsData: HonorItem[] = [
       "The winner under the problem statement given by AICTE 'Develop Online Proctored Exam Tool' Software Edition.",
     url: "https://drive.google.com/file/d/11KpbP_f7_s7xUv2yD2q7XwloCsltZxVZ/view",
     icon: FiAward,
+    logo: sihLogo,
   },
   {
     title: "Google Farewell Challenge • Global Rank 345",
@@ -28,6 +35,7 @@ export const honorsData: HonorItem[] = [
       "Secured a global rank of 345 and an all-India rank of 128 in the Round A 2023 coding competition.",
     url: "https://drive.google.com/file/d/1Vls-iQqAV_Z84gk2UmDiO7xGHLenIl20/view?usp=drive_link",
     icon: FiAward,
+    logo: googleLogo,
   },
   {
     title: "Reply Coding Challenge • Global Rank 85",
@@ -37,6 +45,7 @@ export const honorsData: HonorItem[] = [
       "Secured a global rank of 85 in the Standard Edition coding competition (Team of 4).",
     url: "https://drive.google.com/file/d/1hCcVpx70VVQGAvpLCL67BvqDxyJWpTyb/view?usp=drive_link",
     icon: FiAward,
+    logo: replyLogo,
   },
   {
     title: "Google Kickstart • Global Rank 383",
@@ -46,6 +55,7 @@ export const honorsData: HonorItem[] = [
       "Secured a global rank of 383 and an all-India rank of 248 in Round G 2022 coding competition.",
     url: "https://drive.google.com/file/d/1_NZhgJ3SPsAxMnO6mZPvRDtJ0m8CXy1D/view?usp=drive_link",
     icon: FiAward,
+    logo: googleLogo,
   },
   {
     title: "Smart India Hackathon • Finalist",
@@ -55,6 +65,7 @@ export const honorsData: HonorItem[] = [
       "One of the finalists under the problem statement given by AICTE 'Graphical Password Authentication' Software Edition.",
     url: "https://drive.google.com/file/d/1jWVyusKzGxK6Ve7g0dD28gyicBT5k0bB/view?usp=drive_link",
     icon: FiAward,
+    logo: sihLogo,
   },
   {
     title: "Google Kickstart • Global Rank 772",
@@ -64,6 +75,7 @@ export const honorsData: HonorItem[] = [
       "Secured a global rank of 772 and an all-India rank of 432 in Round C 2022 coding competition.",
     url: "https://drive.google.com/file/d/1CjDzk_xH8wRvEBywamR03bYJhRTAamZA/view?usp=drive_link",
     icon: FiAward,
+    logo: googleLogo,
   },
 ];
 
@@ -73,6 +85,7 @@ export interface CertificationItem {
   date: string;
   credentialUrl?: string;
   icon: IconType;
+  logo?: StaticImageData;
 }
 
 export const certificationsData: CertificationItem[] = [
@@ -83,5 +96,6 @@ export const certificationsData: CertificationItem[] = [
     credentialUrl:
       "https://www.credly.com/badges/3611dbac-6295-433c-8828-dd03255aee08/public_url",
     icon: FiAward,
+    logo: googleLogo,
   },
 ];

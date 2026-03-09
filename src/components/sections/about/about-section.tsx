@@ -24,14 +24,17 @@ export function AboutSection() {
           className="list-disc pl-4 space-y-3 marker:text-gray-400 font-mono"
         >
           {aboutData.bio.map((paragraph, i) => (
-            <li key={i} className="text-sm leading-relaxed text-text-secondary">
+            <li
+              key={i}
+              className="text-[13px] leading-relaxed text-text-secondary"
+            >
               {paragraph}
             </li>
           ))}
         </motion.ul>
 
         {/* Featured Projects */}
-        {aboutData.featuredProjects &&
+        {/* {aboutData.featuredProjects &&
           aboutData.featuredProjects.length > 0 && (
             <motion.div variants={staggerItem} className="space-y-2 pt-2">
               <h3 className="text-xs font-medium uppercase tracking-widest text-text-muted">
@@ -54,7 +57,7 @@ export function AboutSection() {
                 ))}
               </div>
             </motion.div>
-          )}
+          )} */}
       </motion.div>
     </Section>
   );
