@@ -21,7 +21,7 @@ export function StackSection() {
           <motion.div
             key={tech.name}
             variants={staggerItem}
-            className="group relative flex items-center gap-2 border border-edge px-2 py-1.5 transition-all bg-surface/50 hover:border-accent/10 hover:scale-105"
+            className="group relative flex items-center gap-2 border border-edge border-dashed px-2 py-1.5 transition-all bg-surface/50 hover:border-accent/10 hover:scale-105"
           >
             <tech.icon
               className="h-3.5 w-3.5 shrink-0"

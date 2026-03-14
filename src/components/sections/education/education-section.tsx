@@ -77,9 +77,7 @@ export function EducationSection() {
               {/* Row 2: Degree info — always visible */}
               <div className="flex items-start gap-1 w-full">
                 {/* Graduation icon */}
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border border-edge bg-surface text-text-muted mt-2 group-hover:border-black/10 transition-colors">
-                  <LuGraduationCap className="h-5 w-5 rounded-sm p-0.5 border border-edge group-hover:border-black/10 transition-colors" />
-                </div>
+                <LuGraduationCap className="mx-0.5 mt-2.5 h-5 w-5 rounded-sm p-0.5 border border-dashed text-text-muted border-edge group-hover:border-accent/20 transition-colors" />
                 {/* Clickable degree card */}
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : edu.id)}

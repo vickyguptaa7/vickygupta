@@ -25,9 +25,9 @@ export function HeroSection() {
           <MagneticAvatar />
 
           {/* Info Area */}
-          <div className="flex flex-col flex-1 min-w-0 border-t sm:border-t-0 sm:border-l border-edge">
+          <div className="flex flex-col flex-1 min-w-0 border-t sm:border-t-0 sm:border-l border-edge border-dashed">
             {/* Name + Tagline */}
-            <div className="group flex flex-col justify-center flex-1 p-4 border-b border-edge">
+            <div className="group flex flex-col justify-center flex-1 p-4 border-b border-edge border-dashed">
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}

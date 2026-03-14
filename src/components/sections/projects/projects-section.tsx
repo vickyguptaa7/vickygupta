@@ -71,22 +71,20 @@ export function ProjectsSection() {
                 className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all group/btn`}
               >
                 {/* Project icon / Initial avatar */}
-                <div className="border border-edge rounded-[7px] p-px group-hover/btn:border-black/10 transition-colors">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface overflow-hidden group-hover/btn:border-black/10 transition-colors">
-                    {project.icon ? (
-                      <Image
-                        src={project.icon}
-                        alt={`${project.title} icon`}
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    ) : (
-                      <span className="text-xs font-bold text-text-primary">
-                        {project.title.charAt(0)}
-                      </span>
-                    )}
-                  </div>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge border-dashed bg-surface overflow-hidden group-hover/btn:border-accent/20 transition-colors">
+                  {project.icon ? (
+                    <Image
+                      src={project.icon}
+                      alt={`${project.title} icon`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold text-text-primary">
+                      {project.title.charAt(0)}
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex-1 min-w-0">

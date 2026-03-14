@@ -26,6 +26,7 @@ export function MagneticAvatar() {
   const rotateY = useTransform(springX, [-0.5, 0.5], [-8, 8]);
 
   const [isHovered, setIsHovered] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleMouse = useCallback(
     (e: React.MouseEvent) => {
@@ -43,14 +44,29 @@ export function MagneticAvatar() {
     x.set(0);
     y.set(0);
     setIsHovered(false);
+    // Stop audio on leave
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
   }, [x, y]);
+
+  const handleHover = useCallback(() => {
+    setIsHovered(true);
+    // Play effect sound on hover
+    const audio = new Audio("/effect.mp3");
+    audioRef.current = audio;
+    audio.play().catch(() => {
+      // Silently fail if audio doesn't play (e.g., due to browser restrictions)
+    });
+  }, []);
 
   return (
     <div className="p-4 flex items-center justify-center">
       <motion.div
         ref={ref}
         onMouseMove={handleMouse}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={handleHover}
         onMouseLeave={handleLeave}
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -76,7 +92,7 @@ export function MagneticAvatar() {
         </AnimatePresence>
 
         {/* Avatar container */}
-        <div className="relative h-36 w-36 rounded-full overflow-hidden border border-edge bg-surface">
+        <div className="relative h-36 w-36 rounded-full overflow-hidden border border-edge bg-surface border-dashed">
           <Image
             src={heroData.avatarUrl}
             alt={heroData.name}

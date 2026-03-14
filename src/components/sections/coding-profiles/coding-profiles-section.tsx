@@ -18,7 +18,7 @@ export function CodingProfilesSection() {
       contentClassName="p-0"
     >
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2"
+        className="grid grid-cols-1 sm:grid-cols-2  screen-line-after "
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-50px" }}
@@ -31,25 +31,23 @@ export function CodingProfilesSection() {
             target="_blank"
             rel="noopener noreferrer"
             variants={staggerItem}
-            className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-surface screen-line-after group ${
+            className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-surface group border-dashed my-px ${
               index % 2 === 0 ? "sm:border-r sm:border-edge" : ""
             }`}
           >
             {/* Platform Icon */}
-            <div className="border border-edge rounded-[7px] group-hover:border-black/10 transition-colors">
-              <div className="flex h-9 w-9 m-px shrink-0 items-center justify-center border border-edge bg-surface transition-colors overflow-hidden rounded-md group-hover:border-black/10 ">
-                {profile.logo ? (
-                  <Image
-                    src={profile.logo}
-                    alt={`${profile.platform} logo`}
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
-                ) : (
-                  <profile.icon className="h-5 w-5 text-text-primary" />
-                )}
-              </div>
+            <div className="flex h-9 w-9 m-px shrink-0 items-center justify-center border border-edge border-dashed bg-surface transition-colors overflow-hidden rounded-md group-hover:border-accent/20 ">
+              {profile.logo ? (
+                <Image
+                  src={profile.logo}
+                  alt={`${profile.platform} logo`}
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
+              ) : (
+                <profile.icon className="h-5 w-5 text-text-primary" />
+              )}
             </div>
 
             {/* Info */}

@@ -37,20 +37,18 @@ export function CertificationsSection() {
               aria-label={`View ${cert.title} credential`}
             >
               {/* Icon / Logo */}
-              <div className="border border-edge rounded-[7px] p-px group-hover:border-black/10 transition-colors">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted overflow-hidden group-hover:border-black/10 transition-colors">
-                  {cert.logo ? (
-                    <Image
-                      src={cert.logo}
-                      alt={`${cert.issuer} logo`}
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <cert.icon className="h-3.5 w-3.5" />
-                  )}
-                </div>
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors">
+                {cert.logo ? (
+                  <Image
+                    src={cert.logo}
+                    alt={`${cert.issuer} logo`}
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                ) : (
+                  <cert.icon className="h-3.5 w-3.5" />
+                )}
               </div>
 
               {/* Content */}

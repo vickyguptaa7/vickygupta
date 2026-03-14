@@ -37,7 +37,7 @@ export function SocialLinksSection() {
   return (
     <div className="flex flex-col sm:flex-row items-stretch">
       {/* Social Links */}
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 screen-line-before">
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3  gap-2"
           initial="initial"
@@ -53,14 +53,14 @@ export function SocialLinksSection() {
               rel="noopener noreferrer"
               variants={staggerItem}
               className={cn(
-                `flex items-center gap-3 px-4 py-3.5 text-sm hover:bg-surface active:scale-[0.99] border-r border-l border-edge screen-line-before group `,
+                `flex items-center gap-3 px-4 py-3.5 text-sm hover:bg-surface my-px active:scale-[0.99] border-r border-l border-edge  group border-dashed`,
                 index % 3 == 0 && "border-l-0",
                 index % 3 == 2 && "border-r-0",
               )}
             >
               <link.icon
                 className={cn(
-                  "h-6 w-6 border border-edge rounded-sm shrink-0 group-hover:border-black/40  transition-colors",
+                  "h-6 w-6 border border-dashed border-edge rounded-sm shrink-0 group-hover:border-accent/60  transition-colors",
                   link.iconColor || "text-text-primary",
                 )}
               />

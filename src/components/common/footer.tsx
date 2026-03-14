@@ -18,7 +18,7 @@ export function Footer() {
         {/* Back to top */}
         <button
           onClick={scrollToTop}
-          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-accent/30 hover:text-accent"
+          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-accent/30 hover:text-accent cursor-pointer"
           aria-label="Back to top"
         >
           <FiArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-0.5" />
@@ -33,13 +33,10 @@ export function Footer() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface hover:text-text-primary"
+              className="flex h-6 w-6 items-center justify-center rounded-xs text-text-muted transition-colors hover:bg-surface hover:text-text-primary border border-edge hover:border-black/30 border-dashed"
               aria-label={link.name}
             >
-              <link.icon
-                size={20}
-                className="border border-edge hover:border-black/30 transition-colors rounded-sm"
-              />
+              <link.icon size={20} className="" />
             </a>
           ))}
         </div>

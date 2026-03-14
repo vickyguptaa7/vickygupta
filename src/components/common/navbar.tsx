@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FaGithub } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
 
 import { CommandPalette } from "@/components/common/command-palette";
 import { TransitionLink } from "@/components/common/page-transition";
@@ -14,6 +15,16 @@ import { topNavLinks } from "@/constants/navigation";
 
 export function Navbar() {
   const pathname = usePathname();
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowImage(window.scrollY > 200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.nav
@@ -25,14 +36,30 @@ export function Navbar() {
         " bg-background/60 backdrop-blur-xl",
       )}
     >
-      <div className="flex h-12 items-center justify-between px-4 border-edge border-l border-r max-w-3xl mx-auto screen-line-after screen-line-before mt-2">
+      <div className="flex h-12 items-center justify-between px-2 border-edge border-l border-dashed border-r max-w-3xl mx-auto screen-line-after screen-line-before mt-2">
         {/* Left — Logo */}
-        <TransitionLink
-          href="/"
-          className="font-mono text-sm font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
-        >
-          VG
-        </TransitionLink>
+        {showImage && (
+          <TransitionLink
+            href="/"
+            className="font-mono text-sm font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              className="w-7 h-7 rounded-sm overflow-hidden border border-edge"
+            >
+              <Image
+                src="/images/author.jpeg"
+                alt="VG"
+                width={28}
+                height={28}
+                className="w-full h-full object-cover p-px rounded-sm"
+              />
+            </motion.div>
+          </TransitionLink>
+        )}
 
         {/* Centre — Page links */}
         <div className="flex items-center gap-0.5">
@@ -62,15 +89,6 @@ export function Navbar() {
         {/* Right — Actions */}
         <div className="flex items-center gap-1">
           <CommandPalette />
-          <a
-            href="https://github.com/vickyguptaa7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center p-2 text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
-            aria-label="GitHub"
-          >
-            <FaGithub size={14} />
-          </a>
           <ThemeToggle />
         </div>
       </div>

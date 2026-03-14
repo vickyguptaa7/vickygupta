@@ -79,9 +79,7 @@ export function ExperienceSection() {
               {primaryRole && (
                 <div className="flex items-start gap-1 w-full">
                   {/* Code icon */}
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm border border-edge bg-surface text-text-muted mt-2 group-hover:border-black/10 transition-colors">
-                    <LuCodeXml className="h-5 w-5 rounded-sm p-0.5 border border-edge group-hover:border-black/10 transition-colors" />
-                  </div>
+                  <LuCodeXml className="h-5 w-5 mx-0.5 mt-2.5 rounded-sm p-0.5 text-text-muted border border-edge group-hover:border-accent/20 border-dashed transition-colors" />
                   {/* Clickable company card */}
                   <button
                     onClick={() =>

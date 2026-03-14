@@ -36,20 +36,18 @@ export function HonorsSection() {
               className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface"
             >
               {/* Icon / Logo */}
-              <div className="border border-edge rounded-[7px] p-px group-hover:border-black/10 transition-colors">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted overflow-hidden group-hover:border-black/10 transition-colors">
-                  {honor.logo ? (
-                    <Image
-                      src={honor.logo}
-                      alt={`${honor.issuer} logo`}
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                    />
-                  ) : (
-                    <honor.icon className="h-3.5 w-3.5" />
-                  )}
-                </div>
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors">
+                {honor.logo ? (
+                  <Image
+                    src={honor.logo}
+                    alt={`${honor.issuer} logo`}
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                ) : (
+                  <honor.icon className="h-3.5 w-3.5" />
+                )}
               </div>
 
               {/* Content */}

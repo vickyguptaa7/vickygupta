@@ -8,7 +8,7 @@ export function Panel({ className, children, ...props }: PanelProps) {
   return (
     <section
       className={cn(
-        "screen-line-before screen-line-after border-x border-edge",
+        "screen-line-before screen-line-after border-x border-edge border-dashed",
         className,
       )}
       {...props}

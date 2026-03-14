@@ -99,7 +99,7 @@ export function SectionNav() {
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 touch-none"
           >
             <nav
-              className="flex items-center border border-edge bg-background/80 shadow-lg shadow-black/[0.08] backdrop-blur-xl max-w-[calc(100vw-2rem)]"
+              className="flex items-center border border-edge border-dashed bg-background/80 shadow-lg shadow-black/[0.08] backdrop-blur-xl max-w-[calc(100vw-2rem)]"
               aria-label="Section navigation"
             >
               {/* Drag handle */}
