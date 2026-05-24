@@ -94,9 +94,9 @@ export function GitHubHeatmapSection() {
         >
           {/* Heatmap grid — scrollable on mobile/tablet only */}
           <div className="max-md:overflow-x-auto pb-4">
-            <div className="flex gap-[3px] min-w-[700px]">
+            <div className="flex gap-[4.5px]">
               {weeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-[3px]">
+                <div key={wi} className="flex flex-col gap-[4.5px]">
                   {week.map((day, di) => (
                     <motion.div
                       key={di}

@@ -25,8 +25,10 @@ export function ContactSection() {
         </p>
 
         <a
-          href={`mailto:${heroData.email}`}
-          className="group inline-flex items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-background transition-all hover:bg-accent/90 active:scale-[0.98] shadow-sm"
+          href={`mailto:${heroData.email}?subject=Hello%20Vicky!&body=Hi%20Vicky,%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20reach%20out.%0D%0A%0D%0A[Write%20your%20message%20here]%0D%0A%0D%0ALooking%20forward%20to%20hearing%20from%20you!`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-dark group"
         >
           <FiMail className="h-4 w-4 transition-transform group-hover:-rotate-12 me-2" />
           Say hi

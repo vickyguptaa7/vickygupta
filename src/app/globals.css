@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("/fonts/HankenGrotesk-Variable.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Hanken Grotesk Italic";
+  src: url("/fonts/HankenGrotesk-Italic-Variable.ttf") format("truetype");
+}
+
 /* === screen-line utilities (full-width horizontal lines) === */
 @utility screen-line-before {
   @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:w-[200vw] before:border-t before:border-dashed before:border-edge;
@@ -12,6 +22,7 @@
 
 /* === Light theme (default) === */
 :root {
+  --blog-font-size: 16px;
   --background: #ffffff;
   --foreground: #09090b;
 
@@ -32,26 +43,43 @@
   /* Accent */
   --accent: #18181b;
   --accent-muted: #f4f4f5;
+
+  /* MDX typography */
+  --mdx-content-measure: 70ch;
+  --mdx-body-size: clamp(1rem, 0.98rem + 0.12vw, 1.04rem);
+  --mdx-body-leading: 1.8;
+  --mdx-h1-size: clamp(2rem, 1.72rem + 1.1vw, 2.25rem);
+  --mdx-h2-size: clamp(1.58rem, 1.42rem + 0.86vw, 1.86rem);
+  --mdx-h3-size: clamp(1.28rem, 1.18rem + 0.58vw, 1.5rem);
+  --mdx-h4-size: clamp(1.12rem, 1.06rem + 0.35vw, 1.24rem);
+  --mdx-heading-leading: 1.22;
+  --mdx-link: #2563eb;
+  --mdx-link-hover: #1d4ed8;
+  --mdx-link-visited: #6d28d9;
 }
 
 /* === Dark theme === */
 [data-theme="dark"] {
-  --background: #09090b;
+  --background: #110f0f;
   --foreground: #fafafa;
 
   --surface: #18181b;
   --surface-hover: #27272a;
 
   --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-secondary: #e0e0e0;
+  --text-muted: #e0e0e0;
 
   --border: #27272a;
-  --edge: color-mix(in srgb, #27272a 64%, #09090b);
+  --edge: color-mix(in srgb, #242424 64%, #141414);
   --border-subtle: #18181b;
 
   --accent: #fafafa;
   --accent-muted: #27272a;
+
+  --mdx-link: #60a5fa;
+  --mdx-link-hover: #93c5fd;
+  --mdx-link-visited: #c4b5fd;
 }
 
 /* === Map to Tailwind v4 theme === */
@@ -178,23 +206,6 @@ html {
   inherits: false;
 }
 
-/* Status dot ping */
-.hero-status-ping {
-  animation: hero-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes hero-ping {
-  0% {
-    transform: scale(1);
-    opacity: 0.75;
-  }
-  75%,
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
 /* Name underline reveal on hover */
 .hero-name-underline::after {
   content: "";
@@ -211,4 +222,244 @@ html {
 
 .group:hover .hero-name-underline::after {
   transform: scaleX(1);
+}
+
+.font-hanken-grotesk {
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* Code block copy button styles */
+.prose pre {
+  @apply relative;
+}
+
+/* Blog font size controls */
+.prose {
+  font-size: var(--blog-font-size);
+}
+
+.prose p,
+.prose li,
+.prose blockquote {
+  font-size: var(--blog-font-size);
+}
+
+.prose h1 {
+  font-size: calc(var(--blog-font-size) * 2.25);
+}
+
+.prose h2 {
+  font-size: calc(var(--blog-font-size) * 1.875);
+}
+
+.prose h3 {
+  font-size: calc(var(--blog-font-size) * 1.5);
+}
+
+.prose h4 {
+  font-size: calc(var(--blog-font-size) * 1.25);
+}
+
+[data-theme="dark"] .blog-route {
+  --border: color-mix(in srgb, #ffffff 10%, transparent);
+}
+
+.blog-prose {
+  @apply prose prose-neutral max-w-none dark:prose-invert;
+  @apply prose-headings:scroll-mt-24 prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-text-primary;
+  @apply prose-p:my-5 prose-p:text-text-primary;
+  @apply prose-strong:font-semibold prose-strong:text-text-primary;
+  @apply prose-ul:my-5 prose-ul:pl-6 prose-ol:my-5 prose-ol:pl-6;
+  @apply prose-li:my-1 prose-li:text-text-primary;
+  @apply prose-blockquote:my-6 prose-blockquote:border-l-4 prose-blockquote:border-border prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-[#909092];
+  @apply prose-hr:my-10 prose-hr:border-border/70;
+  @apply prose-code:rounded prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:font-medium prose-code:text-text-primary;
+  @apply prose-code:before:content-none prose-code:after:content-none;
+  @apply prose-pre:my-6 prose-pre:overflow-x-auto prose-pre:rounded-2xl prose-pre:border prose-pre:border-border/70 prose-pre:bg-[#101010] prose-pre:px-4 prose-pre:py-4 prose-pre:text-[0.92rem];
+  @apply prose-img:my-8 prose-img:w-full prose-img:max-w-full prose-img:rounded-2xl prose-img:border prose-img:border-border/70;
+  @apply prose-table:my-8 prose-table:w-full prose-table:border-collapse;
+  @apply prose-th:border prose-th:border-border/70 prose-th:bg-surface prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:text-text-primary;
+  @apply prose-td:border prose-td:border-border/70 prose-td:px-3 prose-td:py-2 prose-td:text-text-primary;
+  max-width: 70ch;
+  margin-inline: auto;
+  font-size: var(--blog-font-size);
+  line-height: 1.8;
+  letter-spacing: 0.002em;
+}
+
+.blog-prose :where(h2):not(:where(.not-prose *)) {
+  margin-top: 2.75rem;
+  margin-bottom: 0.95rem;
+  font-size: 1.875rem;
+  line-height: 1.2;
+}
+
+.blog-prose :where(h3):not(:where(.not-prose *)) {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1.28;
+}
+
+.blog-prose :where(h4):not(:where(.not-prose *)) {
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.blog-prose :where(p, li):not(:where(.not-prose *)) {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.blog-prose :where(a):not(:where(.not-prose *)) {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--text-primary) 25%,
+    transparent
+  );
+  text-decoration-thickness: 1.25px;
+  text-underline-offset: 0.2em;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.blog-prose :where(a:hover):not(:where(.not-prose *)) {
+  color: color-mix(in srgb, var(--text-primary) 82%, #909092);
+  text-decoration-color: currentColor;
+}
+
+.blog-prose :where(pre):not(:where(.not-prose *)) {
+  line-height: 1.7;
+}
+
+.blog-prose :where(pre code):not(:where(.not-prose *)) {
+  font-size: 0.92rem;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-weight: inherit;
+  box-shadow: none;
+}
+
+.blog-prose :where(pre code span):not(:where(.not-prose *)) {
+  background: transparent;
+}
+
+/* --- Article typography (blog + project details) --- */
+.article-prose {
+  @apply prose prose-zinc dark:prose-invert max-w-none text-text-secondary;
+  @apply prose-headings:scroll-mt-28 prose-headings:text-text-primary prose-headings:tracking-tight;
+  @apply prose-h1:mt-0 prose-h1:mb-6 prose-h1:border-b prose-h1:border-edge/70 prose-h1:pb-3 prose-h1:font-bold;
+  @apply prose-h2:mt-12 prose-h2:mb-3 prose-h2:font-semibold;
+  @apply prose-h3:mt-9 prose-h3:mb-2 prose-h3:font-semibold;
+  @apply prose-h4:mt-7 prose-h4:mb-2 prose-h4:font-semibold;
+  @apply prose-p:my-5 prose-p:text-text-primary;
+  @apply prose-ul:my-6 prose-ol:my-6 prose-ul:pl-6 prose-ol:pl-6;
+  @apply prose-li:my-1 prose-li:pl-1 prose-li:text-text-primary;
+  @apply prose-ul:marker:text-text-muted prose-ol:marker:text-text-muted;
+  @apply prose-strong:text-text-primary prose-strong:font-semibold;
+  @apply prose-blockquote:my-7 prose-blockquote:border-l-2 prose-blockquote:border-edge prose-blockquote:bg-surface/35 prose-blockquote:py-1 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-text-secondary;
+  @apply prose-hr:my-10 prose-hr:border-edge/80;
+  @apply prose-code:rounded prose-code:bg-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:font-medium prose-code:text-text-primary;
+  @apply prose-code:before:content-none prose-code:after:content-none;
+  @apply prose-pre:my-7 prose-pre:overflow-x-auto prose-pre:rounded-none prose-pre:border prose-pre:border-edge prose-pre:bg-surface prose-pre:px-4 prose-pre:py-3 prose-pre:text-[0.92rem];
+  @apply prose-img:my-7 prose-img:w-full prose-img:max-w-full prose-img:rounded-none prose-img:border prose-img:border-edge prose-img:bg-surface;
+  @apply prose-table:my-8 prose-table:w-full prose-table:border-collapse;
+  @apply prose-th:border prose-th:border-edge prose-th:bg-surface prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-th:text-text-primary;
+  @apply prose-td:border prose-td:border-edge prose-td:px-3 prose-td:py-2 prose-td:align-top;
+  @apply prose-figure:my-8 prose-figcaption:mt-2 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-text-muted;
+  max-width: var(--mdx-content-measure);
+  margin-inline: auto;
+  font-size: var(--mdx-body-size);
+  line-height: var(--mdx-body-leading);
+  letter-spacing: 0.005em;
+}
+
+.article-prose :where(h1):not(:where(.not-prose *)) {
+  font-size: var(--mdx-h1-size);
+  line-height: var(--mdx-heading-leading);
+}
+
+.article-prose :where(h2):not(:where(.not-prose *)) {
+  font-size: var(--mdx-h2-size);
+  line-height: 1.28;
+}
+
+.article-prose :where(h3):not(:where(.not-prose *)) {
+  font-size: var(--mdx-h3-size);
+  line-height: 1.34;
+}
+
+.article-prose :where(h4):not(:where(.not-prose *)) {
+  font-size: var(--mdx-h4-size);
+  line-height: 1.38;
+}
+
+.article-prose :where(p):not(:where(.not-prose *)) {
+  font-size: var(--mdx-body-size);
+  line-height: var(--mdx-body-leading);
+}
+
+.article-prose :where(li):not(:where(.not-prose *)) {
+  font-size: calc(var(--mdx-body-size) * 0.985);
+  line-height: 1.74;
+}
+
+.article-prose :where(code):not(:where(pre code, .not-prose *)) {
+  font-size: 0.85em;
+}
+
+.article-prose :where(pre):not(:where(.not-prose *)) {
+  line-height: 1.7;
+}
+
+.article-prose :where(pre code):not(:where(.not-prose *)) {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-weight: inherit;
+  box-shadow: none;
+}
+
+.article-prose :where(pre code span):not(:where(.not-prose *)) {
+  background: transparent;
+}
+
+.article-prose :where(a):not(:where(.not-prose *)) {
+  color: var(--mdx-link);
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1.25px;
+  text-decoration-color: color-mix(in srgb, var(--mdx-link) 34%, var(--border));
+  text-underline-offset: 0.23em;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
+}
+
+.article-prose :where(strong a, a strong):not(:where(.not-prose *)) {
+  font-weight: 600;
+}
+
+.article-prose :where(a:hover):not(:where(.not-prose *)) {
+  color: var(--mdx-link-hover);
+  text-decoration-color: currentColor;
+}
+
+.article-prose :where(a:visited):not(:where(.not-prose *)) {
+  color: var(--mdx-link-visited);
+}
+
+.article-prose :where(a:focus-visible):not(:where(.not-prose *)) {
+  outline: 2px solid var(--mdx-link);
+  outline-offset: 2px;
+  border-radius: 2px;
 }

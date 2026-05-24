@@ -14,7 +14,7 @@ export const socialLinks: SocialLink[] = [
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/vickyguptaa7/",
     icon: FaLinkedin,
-    iconColor: "text-[#0A66C2]",
+    iconColor: "text-text-primary",
   },
   {
     name: "GitHub",
@@ -22,13 +22,8 @@ export const socialLinks: SocialLink[] = [
     icon: FaGithubSquare,
     iconColor: "text-text-primary",
   },
-  // {
-  //   name: "Email",
-  //   url: "mailto:vickyguptaa7@gmail.com",
-  //   icon: FiMail,
-  // },
   {
-    name: "X (Twitter)",
+    name: "Twitter",
     url: "https://x.com/vickyguptaa7",
     icon: FaSquareXTwitter,
     iconColor: "text-text-primary",

@@ -5,8 +5,8 @@ export interface NavLink {
 
 /** Top-level page navigation (shown in the top navbar) */
 export const topNavLinks: NavLink[] = [
-  { label: "Portfolio", href: "/" },
-  { label: "Blog", href: "/blog" },
+  // { label: "Portfolio", href: "/" },
+  // { label: "Blog", href: "/blog" },
 ];
 
 /** Section-level navigation (shown in the sticky bottom bar on the portfolio page) */

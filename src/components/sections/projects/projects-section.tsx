@@ -63,12 +63,12 @@ export function ProjectsSection() {
             <motion.div
               key={project.id}
               variants={staggerItem}
-              className="screen-line-after group/btn transition-colors hover:bg-surface"
+              className="screen-line-after group/btn transition-colors hover:bg-surface font-mono"
             >
               {/* Project header - clickable */}
               <button
                 onClick={() => setExpandedId(isExpanded ? null : project.id)}
-                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all group/btn`}
+                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all group/btn cursor-pointer`}
               >
                 {/* Project icon / Initial avatar */}
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge border-dashed bg-surface overflow-hidden group-hover/btn:border-accent/20 transition-colors">
@@ -175,7 +175,7 @@ export function ProjectsSection() {
 
                 {/* Expand indicator */}
                 <FiChevronDown
-                  className={`h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 group-hover/btn:text-black ${
+                  className={`h-4 w-4 shrink-0 text-text-muted transition-transform duration-200 group-hover/btn:text-accent ${
                     isExpanded ? "rotate-180" : ""
                   }`}
                 />
@@ -193,9 +193,11 @@ export function ProjectsSection() {
                   >
                     <div className=" px-4 pb-4 space-y-3">
                       {/* Full description */}
-                      <p className="text-xs leading-relaxed text-text-secondary">
-                        {project.description}
-                      </p>
+                      {project.description.length > 0 && (
+                        <p className="text-xs leading-relaxed text-text-secondary">
+                          {project.description}
+                        </p>
+                      )}
 
                       {/* Highlights */}
                       {project.highlights && project.highlights.length > 0 && (

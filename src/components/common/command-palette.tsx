@@ -298,9 +298,9 @@ export function CommandPalette() {
               transition={{ duration: 0.15, ease: "easeOut" }}
               className="fixed inset-0 z-101 flex items-center justify-center pointer-events-none"
             >
-              <div className="w-[90vw] max-w-lg overflow-hidden rounded-lg border border-edge bg-background shadow-2xl pointer-events-auto">
+              <div className="w-[90vw] max-w-lg overflow-hidden rounded-lg border border-edge border-dashed bg-background shadow-2xl pointer-events-auto">
                 {/* Search input */}
-                <div className="flex items-center gap-3 border-b border-edge px-4 py-3">
+                <div className="flex items-center gap-3 border-b border-edge border-dashed px-4 py-3">
                   <FiSearch size={16} className="shrink-0 text-text-muted" />
                   <input
                     ref={inputRef}
@@ -349,7 +349,7 @@ export function CommandPalette() {
                             >
                               <span
                                 className={cn(
-                                  "flex shrink-0 items-center justify-center",
+                                  "flex shrink-0 items-center justify-center transition-colors duration-300",
                                   isActive
                                     ? "text-text-primary"
                                     : "text-text-muted",
@@ -357,7 +357,9 @@ export function CommandPalette() {
                               >
                                 {item.icon}
                               </span>
-                              <span className="truncate">{item.label}</span>
+                              <span className="truncate font-mono text-xs">
+                                {item.label}
+                              </span>
                             </button>
                           );
                         })}

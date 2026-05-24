@@ -101,7 +101,7 @@ export function EducationSection() {
                   {/* Expand / collapse icon */}
                   <FiChevronDown
                     className={cn(
-                      "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-black",
+                      "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-accent",
                       isExpanded ? "rotate-180" : "",
                     )}
                   />

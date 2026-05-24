@@ -18,7 +18,7 @@ export function Footer() {
         {/* Back to top */}
         <button
           onClick={scrollToTop}
-          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-accent/30 hover:text-accent cursor-pointer"
+          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-accent/30 hover:text-accent cursor-pointer border-dashed"
           aria-label="Back to top"
         >
           <FiArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-0.5" />

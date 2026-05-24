@@ -63,7 +63,7 @@ export function CertificationsSection() {
 
               {/* Credential link */}
               {cert.credentialUrl && (
-                <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-black group-hover:opacity-100 group-hover:rotate-45 duration-300" />
+                <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-accent group-hover:opacity-100 group-hover:rotate-45 duration-300" />
               )}
             </a>
           </motion.div>

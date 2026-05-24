@@ -10,6 +10,7 @@ export interface BlogPost {
   description: string;
   date: string;
   tags: string[];
+  image?: string;
   published: boolean;
   content: string;
 }
@@ -32,6 +33,7 @@ export function getAllPosts(): BlogPost[] {
         description: data.description || "",
         date: data.date || "",
         tags: data.tags || [],
+        image: data.image,
         published: data.published !== false,
         content,
       } satisfies BlogPost;
@@ -55,6 +57,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     description: data.description || "",
     date: data.date || "",
     tags: data.tags || [],
+    image: data.image,
     published: data.published !== false,
     content,
   };
@@ -62,4 +65,46 @@ export function getPostBySlug(slug: string): BlogPost | null {
 
 export function getLatestPosts(count: number = 3): BlogPost[] {
   return getAllPosts().slice(0, count);
+}
+
+export function getAllTags(): string[] {
+  const tags = new Set<string>();
+
+  for (const post of getAllPosts()) {
+    for (const tag of post.tags) {
+      tags.add(tag);
+    }
+  }
+
+  return Array.from(tags).sort((a, b) => a.localeCompare(b));
+}
+
+export function getRelatedPosts(slug: string, limit: number = 3): BlogPost[] {
+  const posts = getAllPosts();
+  const currentPost = posts.find((post) => post.slug === slug);
+
+  if (!currentPost) {
+    return [];
+  }
+
+  const currentTags = new Set(currentPost.tags.map((tag) => tag.toLowerCase()));
+
+  return posts
+    .filter((post) => post.slug !== slug)
+    .map((post) => {
+      const sharedTagCount = post.tags.filter((tag) =>
+        currentTags.has(tag.toLowerCase()),
+      ).length;
+
+      return { post, sharedTagCount };
+    })
+    .sort((a, b) => {
+      if (b.sharedTagCount !== a.sharedTagCount) {
+        return b.sharedTagCount - a.sharedTagCount;
+      }
+
+      return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
+    })
+    .slice(0, limit)
+    .map(({ post }) => post);
 }

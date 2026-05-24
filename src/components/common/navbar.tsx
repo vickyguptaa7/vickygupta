@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CommandPalette } from "@/components/common/command-palette";
 import { TransitionLink } from "@/components/common/page-transition";
@@ -36,60 +36,62 @@ export function Navbar() {
         " bg-background/60 backdrop-blur-xl",
       )}
     >
-      <div className="flex h-12 items-center justify-between px-2 border-edge border-l border-dashed border-r max-w-3xl mx-auto screen-line-after screen-line-before mt-2">
-        {/* Left — Logo */}
-        {showImage && (
-          <TransitionLink
-            href="/"
-            className="font-mono text-sm font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="w-7 h-7 rounded-sm overflow-hidden border border-edge"
+      <div className="max-w-4xl mx-auto">
+        <div className="flex h-12 items-center justify-between px-2 mx-4 screen-line-after screen-line-before mt-2  border-edge border-l border-dashed border-r ">
+          {/* Left — Logo */}
+          {showImage && (
+            <TransitionLink
+              href="/"
+              className="font-mono text-sm font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
             >
-              <Image
-                src="/images/author.jpeg"
-                alt="VG"
-                width={28}
-                height={28}
-                className="w-full h-full object-cover p-px rounded-sm"
-              />
-            </motion.div>
-          </TransitionLink>
-        )}
-
-        {/* Centre — Page links */}
-        <div className="flex items-center gap-0.5">
-          {topNavLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-
-            return (
-              <TransitionLink
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "relative px-3 py-1.5 text-xs font-medium transition-colors",
-                  isActive
-                    ? "text-text-primary"
-                    : "text-text-muted hover:text-text-secondary",
-                )}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                className="w-7 h-7 rounded-sm overflow-hidden border border-edge"
               >
-                {link.label}
-              </TransitionLink>
-            );
-          })}
-        </div>
+                <Image
+                  src="/images/author.jpeg"
+                  alt="VG"
+                  width={28}
+                  height={28}
+                  className="w-full h-full object-cover p-px rounded-sm"
+                />
+              </motion.div>
+            </TransitionLink>
+          )}
 
-        {/* Right — Actions */}
-        <div className="flex items-center gap-1">
-          <CommandPalette />
-          <ThemeToggle />
+          {/* Centre — Page links */}
+          <div className="flex items-center gap-0.5">
+            {topNavLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+
+              return (
+                <TransitionLink
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "relative px-3 py-1.5 text-xs font-medium transition-colors",
+                    isActive
+                      ? "text-text-primary"
+                      : "text-text-muted hover:text-text-secondary",
+                  )}
+                >
+                  {link.label}
+                </TransitionLink>
+              );
+            })}
+          </div>
+
+          {/* Right — Actions */}
+          <div className="flex items-center gap-1">
+            <CommandPalette />
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </motion.nav>

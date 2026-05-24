@@ -68,9 +68,22 @@ export function ExperienceSection() {
                     {company.company}
                   </p>
                   {company.isActive && (
-                    <span className="experience-active-dot relative flex h-2 w-2 shrink-0">
-                      <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
-                    </span>
+                    <motion.span className="relative inline-block h-2.5 w-2.5 shrink-0">
+                      {/* Pulsing ring waves */}
+                      <motion.span
+                        className="absolute inset-0 rounded-full border border-green-500"
+                        animate={{ scale: [1, 2], opacity: [0.6, 0] }}
+                        transition={{
+                          duration: 1.5,
+                          ease: "easeOut",
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          repeatDelay: 0.3,
+                        }}
+                      />
+                      {/* Center dot */}
+                      <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inline-block h-2.5 w-2.5 rounded-full bg-green-500" />
+                    </motion.span>
                   )}
                 </div>
               </div>
@@ -101,7 +114,7 @@ export function ExperienceSection() {
                     {/* Expand / collapse icon */}
                     <FiChevronDown
                       className={cn(
-                        "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-black",
+                        "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-accent",
                         isExpanded ? "rotate-180" : "",
                       )}
                     />

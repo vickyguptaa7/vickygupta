@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FiExternalLink } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
 

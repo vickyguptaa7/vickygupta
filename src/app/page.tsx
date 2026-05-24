@@ -19,15 +19,7 @@ export default function Home() {
     <>
       <SectionNav />
       <main id="main-content" className="w-full overflow-x-hidden pt-12 mt-4">
-        <div
-          className="mx-auto md:max-w-5xl px-[128px]"
-          style={{
-            maskImage:
-              "linear-gradient(to right, #000 0%, black 80px, black calc(100% - 80px), #000 100%), radial-gradient(ellipse 400px 300px at 50% 30%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 85%, #000 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, #000 0%, black 80px, black calc(100% - 80px), #000 100%), radial-gradient(ellipse 400px 300px at 50% 30%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.5) 85%, #000 100%)",
-          }}
-        >
+        <div className="mx-auto md:max-w-4xl px-4 ">
           <HeroSection />
           <Separator />
 
@@ -36,28 +28,8 @@ export default function Home() {
           </ScrollReveal>
           <Separator />
 
-          <ScrollReveal delay={0.05}>
-            <CodingProfilesSection />
-          </ScrollReveal>
-          <div className="flex h-2 w-full border-x border-edge" />
-
-          <ScrollReveal delay={0.05}>
-            <GitHubHeatmapSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal>
-            <StackSection />
-          </ScrollReveal>
-          <Separator />
-
           <ScrollReveal>
             <ExperienceSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal delay={0.05}>
-            <EducationSection />
           </ScrollReveal>
           <Separator />
 
@@ -66,13 +38,23 @@ export default function Home() {
           </ScrollReveal>
           <Separator />
 
-          {/* <ScrollReveal delay={0.05}>
-            <BlogSection />
-          </ScrollReveal>
-          <Separator /> */}
-
           <ScrollReveal>
-            <HonorsSection />
+            <StackSection />
+          </ScrollReveal>
+          <Separator />
+
+          <ScrollReveal delay={0.05}>
+            <GitHubHeatmapSection />
+          </ScrollReveal>
+          <Separator />
+
+          <ScrollReveal delay={0.05}>
+            <CodingProfilesSection />
+          </ScrollReveal>
+          <Separator />
+
+          <ScrollReveal delay={0.05}>
+            <EducationSection />
           </ScrollReveal>
           <Separator />
 
@@ -80,6 +62,16 @@ export default function Home() {
             <CertificationsSection />
           </ScrollReveal>
           <Separator />
+
+          <ScrollReveal>
+            <HonorsSection />
+          </ScrollReveal>
+          <Separator />
+
+          {/* <ScrollReveal delay={0.05}>
+            <BlogSection />
+          </ScrollReveal>
+          <Separator /> */}
 
           <ScrollReveal>
             <ContactSection />

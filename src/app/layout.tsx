@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { CursorPet } from "@/components/common/cursor-pet";
-import { Navbar } from "@/components/common/navbar";
-import { PageContent } from "@/components/common/page-transition";
-
+import { SiteShell } from "@/components/common/site-shell";
 import { AppProviders } from "@/providers/app-providers";
 
 import "./globals.css";
@@ -98,9 +95,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <AppProviders>
-          <Navbar />
-          {/* <CursorPet /> */}
-          <PageContent>{children}</PageContent>
+          <SiteShell>{children}</SiteShell>
         </AppProviders>
       </body>
     </html>

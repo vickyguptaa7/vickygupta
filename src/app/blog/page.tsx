@@ -1,16 +1,8 @@
-import { FiArrowLeft } from "react-icons/fi";
+import { Suspense } from "react";
 
-import { TransitionLink } from "@/components/common/page-transition";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelTitle,
-  PanelTitleSup,
-} from "@/components/common/panel";
-import { Separator } from "@/components/common/separator";
-
-import { getAllPosts } from "@/lib/blog";
+import { BlogPostRow } from "@/components/blog/blog-post-row";
+import { BlogPageClient } from "@/components/blog/blog-page-client";
+import { getAllPosts, getAllTags } from "@/lib/blog";
 
 export const metadata = {
   title: "Blog | Vicky Gupta",
@@ -18,96 +10,53 @@ export const metadata = {
     "Thoughts on web development, competitive programming, and software engineering.",
 };
 
-export default function BlogPage() {
+function BlogPageFallback() {
   const posts = getAllPosts();
+  const tags = getAllTags();
 
   return (
-    <main className="w-full overflow-x-hidden pt-12 mt-4">
-      <div className="mx-auto md:max-w-3xl">
-        {/* Back link */}
-        <Panel>
-          <PanelContent className="py-6">
-            <TransitionLink
-              href="/"
-              className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text-primary"
-            >
-              <FiArrowLeft className="h-3.5 w-3.5" />
-              Home
-            </TransitionLink>
-          </PanelContent>
-        </Panel>
+    <div className="mx-auto max-w-2xl px-4 py-8 md:py-10">
+      <section className="space-y-4 pt-2">
+        <div className="space-y-2 pb-4">
+          <h1 className="text-2xl font-bold text-text-primary">Blog</h1>
+          <p className="max-w-xl text-sm leading-6 text-[#909092] md:text-base">
+            Thoughts, tutorials, and insights on engineering and programming.
+          </p>
+        </div>
 
-        <Separator />
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-full bg-text-primary px-3 py-1.5 text-sm font-medium text-background">
+              All
+            </span>
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full bg-surface px-3 py-1.5 text-sm font-medium text-[#909092]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
-        {/* Header */}
-        <Panel>
-          <PanelHeader className="py-4">
-            <PanelTitle>
-              Blog
-              <PanelTitleSup>
-                {String(posts.length).padStart(2, "0")}
-              </PanelTitleSup>
-            </PanelTitle>
-          </PanelHeader>
-          <PanelContent>
-            <p className="text-sm text-text-secondary">
-              Thoughts on web development, competitive programming, and software
-              engineering.
-            </p>
-          </PanelContent>
-        </Panel>
-
-        <Separator />
-
-        {/* Post list */}
-        <Panel>
-          {posts.map((post, index) => (
-            <TransitionLink
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className={`group flex items-start gap-4 px-4 py-4 transition-colors hover:bg-surface ${index > 0 ? "screen-line-before" : ""}`}
-            >
-              <time className="shrink-0 pt-0.5 font-mono text-xs text-text-muted tabular-nums">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
-              <div className="min-w-0 flex-1">
-                <h2 className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">
-                  {post.title}
-                </h2>
-                <p className="mt-1 text-xs text-text-secondary line-clamp-2">
-                  {post.description}
-                </p>
-                {post.tags.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-surface px-2 py-0.5 text-[10px] font-medium text-text-muted"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </TransitionLink>
+        <div className="blog-list">
+          {posts.map((post) => (
+            <BlogPostRow key={post.slug} post={post} />
           ))}
+        </div>
+      </section>
+    </div>
+  );
+}
 
-          {posts.length === 0 && (
-            <PanelContent>
-              <p className="py-12 text-center text-sm text-text-muted">
-                No posts yet. Check back soon!
-              </p>
-            </PanelContent>
-          )}
-        </Panel>
+export default function BlogPage() {
+  const posts = getAllPosts();
+  const tags = getAllTags();
 
-        <Separator />
-      </div>
-    </main>
+  return (
+    <Suspense fallback={<BlogPageFallback />}>
+      <BlogPageClient initialPosts={posts} initialTags={tags} />
+    </Suspense>
   );
 }

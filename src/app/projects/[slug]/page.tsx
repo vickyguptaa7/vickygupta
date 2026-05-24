@@ -1,29 +1,33 @@
+import rehypeHighlight from "@shikijs/rehype";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  FiArrowLeft,
-  FiCheckCircle,
-  FiExternalLink,
-  FiGithub,
-} from "react-icons/fi";
+import { FiArrowLeft, FiExternalLink, FiGithub } from "react-icons/fi";
 
+import { ArticleTocTracker } from "@/components/common/article-toc-tracker";
 import { TransitionLink } from "@/components/common/page-transition";
 import { Separator } from "@/components/common/separator";
 import { TechBadge } from "@/components/common/tech-badge";
 
-import { projects } from "@/constants/projects";
+import { Footer } from "@/components/common/footer";
+import {
+  extractMarkdownHeadings,
+  getArticleHeadingComponents,
+} from "@/lib/mdx";
+import { getAllProjects, getProjectBySlug } from "@/lib/projects";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
+  const projects = getAllProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = getProjectBySlug(slug);
   if (!project) return {};
 
   return {
@@ -34,14 +38,17 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
 
+  const tocHeadings = extractMarkdownHeadings(project.content, 2, 3);
+  const articleHeadingComponents = getArticleHeadingComponents();
+
   return (
-    <main className="w-full overflow-x-hidden pt-12 mt-4">
+    <main className="w-full overflow-x-hidden pt-12 mt-4 pb-28">
       <div className="mx-auto md:max-w-3xl">
         {/* Back link */}
         <section className="screen-line-before screen-line-after border-x border-edge">
@@ -143,44 +150,51 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          {/* Details */}
-          <div className="px-4 py-6 space-y-6">
-            {/* Highlights */}
-            {project.highlights && project.highlights.length > 0 && (
-              <div>
-                <h2 className="text-sm font-semibold text-text-primary mb-3">
-                  Highlights
-                </h2>
-                <ul className="space-y-2">
-                  {project.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="flex items-start gap-2 text-sm text-text-secondary"
-                    >
-                      <FiCheckCircle className="h-3.5 w-3.5 mt-0.5 shrink-0 text-text-muted" />
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Tech Stack */}
-            <div>
-              <h2 className="text-sm font-semibold text-text-primary mb-3">
-                Tech Stack
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {project.technologies.map((tech) => (
-                  <TechBadge key={tech} name={tech} />
-                ))}
-              </div>
+          {/* Tech Stack */}
+          <div className="px-4 py-6 screen-line-after">
+            <h2 className="text-sm font-semibold text-text-primary mb-3">
+              Tech Stack
+            </h2>
+            <div className="flex flex-wrap gap-1.5">
+              {project.technologies.map((tech) => (
+                <TechBadge key={tech} name={tech} />
+              ))}
             </div>
           </div>
         </section>
 
         <Separator />
+
+        {/* MDX Content */}
+        <article className="screen-line-before screen-line-after border-x border-edge">
+          <div className="p-4">
+            <div className="article-prose font-hanken-grotesk">
+              <MDXRemote
+                source={project.content}
+                components={articleHeadingComponents}
+                options={{
+                  mdxOptions: {
+                    rehypePlugins: [
+                      [
+                        rehypeHighlight,
+                        {
+                          theme: "github-dark",
+                        },
+                      ],
+                    ],
+                  },
+                }}
+              />
+            </div>
+          </div>
+        </article>
+
+        <Separator />
+        <Footer />
+        <Separator />
       </div>
+
+      <ArticleTocTracker headings={tocHeadings} />
     </main>
   );
 }
