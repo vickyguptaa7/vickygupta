@@ -9,7 +9,7 @@ export function TechBadge({ name, className }: TechBadgeProps) {
   return (
     <span
       className={cn(
-        "border border-border border-dashed bg-surface px-2.5 py-0.5 font-mono text-[11px] text-text-secondary hover:scale-[1.04] duration-200 transition-all hover:text-black hover:border-accent/30 ",
+        "border border-border border-dashed bg-surface px-2.5 py-0.5 font-mono text-[10px] text-text-secondary hover:scale-[1.04] duration-200 transition-all hover:text-text-primary hover:border-accent/30 sm:text-[11px] ",
         className,
       )}
     >

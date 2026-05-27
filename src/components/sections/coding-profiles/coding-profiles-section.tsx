@@ -8,6 +8,7 @@ import { Section } from "@/components/common/section";
 
 import { staggerContainer, staggerItem } from "@/constants/animation-presets";
 import { codingProfiles } from "@/constants/coding-profiles";
+import { cn } from "@/lib/utils";
 
 export function CodingProfilesSection() {
   return (
@@ -15,10 +16,10 @@ export function CodingProfilesSection() {
       id="coding-profiles"
       title="Coding Profiles"
       count={codingProfiles.length}
-      contentClassName="p-0"
+      contentClassName="p-0 sm:p-0"
     >
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2  screen-line-after "
+        className="grid grid-cols-1 gap-1.5 screen-line-after sm:grid-cols-2 sm:gap-2"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: "-50px" }}
@@ -31,12 +32,18 @@ export function CodingProfilesSection() {
             target="_blank"
             rel="noopener noreferrer"
             variants={staggerItem}
-            className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-surface group border-dashed my-px ${
-              index % 2 === 0 ? "sm:border-r sm:border-edge" : ""
-            }`}
+            className={cn(
+              `group flex items-center gap-2.5 px-3 py-3 transition-colors hover:bg-surface group border-dashed my-px border-edge sm:gap-3 sm:px-4 sm:py-4`,
+              index <= 1 && "border-y sm:border-t-0 sm:border-b",
+              index >= 2 && "border-y sm:border-b-0 sm:border-t",
+              index % 2 == 0 && "sm:border-r",
+              index % 2 == 1 && "sm:border-l",
+              index % 4 == 0 && "border-t-0",
+              index % 4 == 3 && "border-b-0",
+            )}
           >
             {/* Platform Icon */}
-            <div className="flex h-9 w-9 m-px shrink-0 items-center justify-center border border-edge border-dashed bg-surface transition-colors overflow-hidden rounded-md group-hover:border-accent/20 ">
+            <div className="m-px flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-md border border-edge border-dashed bg-surface transition-colors group-hover:border-accent/20 sm:h-9 sm:w-9 group-hover:-rotate-10 duration-300">
               {profile.logo ? (
                 <Image
                   src={profile.logo}
@@ -53,12 +60,12 @@ export function CodingProfilesSection() {
             {/* Info */}
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-text-primary">
+                <span className="text-xs font-medium text-text-primary sm:text-sm">
                   {profile.platform}
                 </span>
                 {profile.rating && (
                   <span
-                    className="px-2 py-0.5 text-[10px] font-semibold"
+                    className="px-2 py-0.5 text-[9px] font-semibold sm:text-[10px]"
                     style={{
                       backgroundColor: `${profile.ratingColor}20`,
                       color: profile.ratingColor,
@@ -68,7 +75,7 @@ export function CodingProfilesSection() {
                   </span>
                 )}
               </div>
-              <p className="text-xs text-text-muted group-hover:text-text-secondary transition-colors">
+              <p className="text-[11px] text-text-muted group-hover:text-text-secondary transition-colors sm:text-xs">
                 @{profile.handle}
                 {profile.rank && (
                   <span className="ml-1.5 text-text-muted group-hover:text-text-secondary transition-colors">
@@ -78,7 +85,7 @@ export function CodingProfilesSection() {
               </p>
             </div>
 
-            <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-accnet group-hover:opacity-100 group-hover:rotate-45 duration-300" />
+            <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-accnet group-hover:opacity-100 group-hover:rotate-45 duration-300 group-hover:text-text-primary" />
           </motion.a>
         ))}
       </motion.div>

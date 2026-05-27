@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
-import { FiChevronDown, FiCode } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
 import { TechBadge } from "@/components/common/tech-badge";
@@ -14,14 +14,16 @@ import { cn } from "@/lib/utils";
 import { LuCodeXml } from "react-icons/lu";
 
 export function ExperienceSection() {
-  const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
+  const [expandedCompanyRole, setExpandedCompanyRole] = useState<string | null>(
+    null,
+  );
 
   return (
     <Section
       id="experience"
       title="Experience"
       count={experiences.length}
-      contentClassName="p-0"
+      contentClassName="p-0 sm:p-0"
     >
       <motion.div
         initial="initial"
@@ -30,14 +32,13 @@ export function ExperienceSection() {
         variants={staggerContainer}
       >
         {experiences.map((company) => {
-          const isExpanded = expandedCompany === company.company;
-          const primaryRole = company.roles[0];
+          const roles = company.roles;
 
           return (
             <motion.div
               key={company.company}
               variants={staggerItem}
-              className="screen-line-after group flex w-full flex-col gap-1 p-4 "
+              className="screen-line-after group flex w-full flex-col gap-1 p-3 sm:p-4 "
             >
               {/* Row 1: Company logo + name + active dot + expand toggle */}
               <div className="flex w-full items-center gap-1">
@@ -52,7 +53,7 @@ export function ExperienceSection() {
                       className="object-cover rounded-full"
                     />
                   ) : (
-                    <span className="text-xs font-bold text-text-primary">
+                    <span className="text-[11px] font-bold text-text-primary sm:text-xs">
                       {company.company.charAt(0)}
                     </span>
                   )}
@@ -62,7 +63,7 @@ export function ExperienceSection() {
                 <div className="flex items-center gap-2 flex-1 min-w-0 ">
                   <p
                     className={cn(
-                      "text-sm font-semibold text-text-primary hero-name-underline relative w-fit ms-2",
+                      "text-xs font-semibold text-text-primary hero-name-underline relative w-fit ms-2 sm:text-sm",
                     )}
                   >
                     {company.company}
@@ -87,106 +88,104 @@ export function ExperienceSection() {
                   )}
                 </div>
               </div>
-
-              {/* Row 2: Role info — always visible for primary role */}
-              {primaryRole && (
-                <div className="flex items-start gap-1 w-full">
-                  {/* Code icon */}
-                  <LuCodeXml className="h-5 w-5 mx-0.5 mt-2.5 rounded-sm p-0.5 text-text-muted border border-edge group-hover:border-accent/20 border-dashed transition-colors" />
-                  {/* Clickable company card */}
-                  <button
-                    onClick={() =>
-                      setExpandedCompany(isExpanded ? null : company.company)
-                    }
-                    aria-expanded={isExpanded}
-                    className={`text-left flex hover:bg-surface p-2 justify-between w-full items-center cursor-pointer group/btn transition-colors duration-200 rounded-sm`}
-                  >
-                    <div className="flex-1 min-w-0 hover:bg-surface">
-                      <p className="text-sm font-medium text-text-primary">
-                        {primaryRole.title}
-                      </p>
-                      <p className="text-xs text-text-muted">
-                        {primaryRole.type}
-                        <span className="mx-1.5 text-text-muted">|</span>
-                        {primaryRole.period}
-                      </p>
-                    </div>
-                    {/* Expand / collapse icon */}
-                    <FiChevronDown
-                      className={cn(
-                        "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-accent",
-                        isExpanded ? "rotate-180" : "",
-                      )}
-                    />
-                  </button>
-                </div>
-              )}
-
-              {/* Expanded highlights — animated */}
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="overflow-hidden w-full"
-                  >
-                    <div className="space-y-4 pl-11">
-                      {company.roles.map((role, roleIdx) => (
-                        <div key={roleIdx} className="space-y-2">
-                          {/* Show role header for additional roles (not primary) */}
-                          {roleIdx > 0 && (
-                            <div className="flex items-start gap-3 -ml-11 pt-2">
-                              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge bg-surface text-text-muted">
-                                <FiCode className="h-3.5 w-3.5" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-text-primary">
-                                  {role.title}
-                                </p>
-                                <p className="text-xs text-text-muted">
-                                  {role.type}
-                                  <span className="mx-1.5 text-edge">|</span>
-                                  {role.period}
-                                </p>
-                              </div>
+              <div className="flex flex-col gap-2 overflow-hidden">
+                {roles?.map((role, roleIndx) => {
+                  const isExpanded = expandedCompanyRole === role.title;
+                  return (
+                    <div
+                      key={role.title}
+                      className="flex flex-col gap-1  relative"
+                    >
+                      {/* Row 2: Role info — always visible for primary role */}
+                      {role && (
+                        <div className="flex items-start gap-1 w-full">
+                          {/* Code icon */}
+                          <div className="relative h-5 w-5 mx-0.5 mt-2.5  rounded-sm p-0.5 text-text-muted border border-edge group-hover:border-accent/20 border-dashed transition-colors flex justify-center items-center">
+                            <LuCodeXml className="h-4 p-0.5 w-4 z-10 relative bg-white" />
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-screen border-l-[1px] border-dashed border-edge"></div>
+                          </div>
+                          {roleIndx == roles.length - 1 && (
+                            <div className="absolute bottom-0 left-3 w-2 border-dashed border-t-[1px] border-edge"></div>
+                          )}
+                          {/* Clickable company card */}
+                          <button
+                            onClick={() =>
+                              setExpandedCompanyRole(
+                                isExpanded ? null : role.title,
+                              )
+                            }
+                            aria-expanded={isExpanded}
+                            className={`text-left flex hover:bg-surface p-1.5 justify-between w-full items-center cursor-pointer group/btn transition-colors duration-200 rounded-sm sm:p-2`}
+                          >
+                            <div className="flex-1 min-w-0 hover:bg-surface">
+                              <p className="text-xs font-medium text-text-primary sm:text-sm">
+                                {role.title}
+                              </p>
+                              <p className="text-[11px] text-text-muted sm:text-xs">
+                                {role.type}
+                                <span className="mx-1.5 text-text-muted">
+                                  |
+                                </span>
+                                {role.period}
+                              </p>
                             </div>
-                          )}
-
-                          {/* Highlights */}
-                          {role.highlights && role.highlights.length > 0 && (
-                            <ul className="list-disc pl-4 space-y-1 marker:text-text-muted">
-                              {role.highlights.map((highlight, i) => (
-                                <li
-                                  key={i}
-                                  className="text-xs leading-relaxed text-text-secondary font-mono"
-                                >
-                                  {highlight}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                            {/* Expand / collapse icon */}
+                            <FiChevronDown
+                              className={cn(
+                                "h-4 w-4 shrink-0 text-text-muted duration-300 transition-transform group-hover/btn:text-accent",
+                                isExpanded ? "rotate-180" : "",
+                              )}
+                            />
+                          </button>
                         </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      )}
 
-              {/* Row 3: Tech badges — always visible for primary role */}
-              {primaryRole?.technologies && (
-                <div
-                  className={cn(
-                    "flex flex-wrap gap-2 pl-9 mt-1",
-                    isExpanded && "mt-2",
-                  )}
-                >
-                  {primaryRole.technologies.map((tech) => (
-                    <TechBadge key={tech} name={tech} />
-                  ))}
-                </div>
-              )}
+                      {/* Expanded highlights — animated */}
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="overflow-hidden w-full"
+                          >
+                            <div className="space-y-3 pl-9 sm:space-y-4 sm:pl-11">
+                              {role.highlights &&
+                                role.highlights.length > 0 && (
+                                  <ul className="list-disc pl-4 space-y-1 marker:text-text-muted">
+                                    {role.highlights.map((highlight, i) => (
+                                      <li
+                                        key={i}
+                                        className="text-[11px] leading-relaxed text-text-secondary font-mono sm:text-xs"
+                                      >
+                                        {highlight}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Row 3: Tech badges — always visible for primary role */}
+                      {role?.technologies && (
+                        <div
+                          className={cn(
+                            "flex flex-wrap gap-1.5 pl-8 mt-1 sm:gap-2 sm:pl-9",
+                            isExpanded && "mt-2",
+                          )}
+                        >
+                          {role.technologies.map((tech) => (
+                            <TechBadge key={tech} name={tech} />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </motion.div>
           );
         })}

@@ -19,8 +19,8 @@ export function BlogHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex h-14 max-w-2xl items-center justify-between px-4">
-        <nav className="flex items-center gap-5 text-sm font-medium">
+      <div className="mx-auto flex h-12 max-w-2xl items-center justify-between px-3 sm:h-14 sm:px-4">
+        <nav className="flex items-center gap-5 text-xs font-medium sm:text-sm">
           {blogNavLinks.map((link) => {
             const isActive =
               link.href === "/"

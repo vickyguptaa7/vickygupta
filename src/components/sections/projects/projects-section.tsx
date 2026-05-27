@@ -4,14 +4,8 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  FiArrowRight,
-  FiChevronDown,
-  FiExternalLink,
-  FiGithub,
-} from "react-icons/fi";
+import { FiChevronDown, FiExternalLink, FiGithub } from "react-icons/fi";
 
-import { usePageTransition } from "@/components/common/page-transition";
 import { Section } from "@/components/common/section";
 import { TechBadge } from "@/components/common/tech-badge";
 
@@ -27,7 +21,6 @@ interface HoveredAction {
 export function ProjectsSection() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [hovered, setHovered] = useState<HoveredAction | null>(null);
-  const { navigate } = usePageTransition();
 
   const handleIconHover = useCallback(
     (label: string, e: React.MouseEvent<HTMLElement>) => {
@@ -48,7 +41,7 @@ export function ProjectsSection() {
       id="projects"
       title="Projects"
       count={projects.length}
-      contentClassName="p-0"
+      contentClassName="p-0 sm:p-0"
     >
       <motion.div
         initial="initial"
@@ -63,43 +56,46 @@ export function ProjectsSection() {
             <motion.div
               key={project.id}
               variants={staggerItem}
-              className="screen-line-after group/btn transition-colors hover:bg-surface font-mono"
+              className="screen-line-after group/btn relative overflow-hidden font-mono transition-colors hover:bg-surface"
             >
+              <div className="absolute top-0 left-5 z-1 h-5 w-3.5 bg-surface sm:left-6 sm:h-6 sm:w-4" />
               {/* Project header - clickable */}
               <button
                 onClick={() => setExpandedId(isExpanded ? null : project.id)}
-                className={`flex w-full items-center gap-3 px-4 py-3.5 text-left transition-all group/btn cursor-pointer`}
+                className={`flex w-full items-center gap-2.5 px-3 py-2.5 text-left transition-all group/btn cursor-pointer sm:gap-3 sm:px-4 sm:py-3.5`}
               >
                 {/* Project icon / Initial avatar */}
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-edge border-dashed bg-surface overflow-hidden group-hover/btn:border-accent/20 transition-colors">
+                <div className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-dashed border-edge z-1 transition-colors group-hover/btn:border-accent/20 bg-surface sm:h-8 sm:w-8">
                   {project.icon ? (
                     <Image
                       src={project.icon}
                       alt={`${project.title} icon`}
                       width={20}
                       height={20}
-                      className="object-contain"
+                      className="relative z-10 bg-surface object-contain"
                     />
                   ) : (
-                    <span className="text-xs font-bold text-text-primary">
+                    <span className="relative z-10 bg-surface text-[11px] font-bold text-text-primary sm:text-xs">
                       {project.title.charAt(0)}
                     </span>
                   )}
                 </div>
+                <div className="pointer-events-none absolute bottom-3 left-[1.625rem] h-screen border-l-[1px] border-dashed border-edge sm:left-8" />
+                <div className="pointer-events-none absolute bottom-3 left-[1.625rem] w-2 border-t-[1px] border-dashed border-edge sm:left-8" />
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-text-primary hero-name-underline relative w-fit">
+                    <p className="text-xs font-medium text-text-primary hero-name-underline relative w-fit sm:text-sm">
                       {project.title}
                     </p>
                     {project.featured && (
-                      <span className="bg-accent/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                      <span className="bg-accent/10 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wider text-accent sm:text-[9px]">
                         Featured
                       </span>
                     )}
                     {project.status && (
                       <span
-                        className={`inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium ${
+                        className={`inline-flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-medium sm:text-[10px] ${
                           project.status === "live"
                             ? "bg-green-500/10 text-green-600"
                             : project.status === "building"
@@ -125,19 +121,7 @@ export function ProjectsSection() {
                     )}
 
                     {/* Action icons */}
-                    <div className="flex items-center gap-1 ml-auto">
-                      <span
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/projects/${project.slug}`);
-                        }}
-                        onMouseEnter={(e) => handleIconHover("View details", e)}
-                        onMouseLeave={handleIconLeave}
-                        className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary cursor-pointer"
-                      >
-                        <FiArrowRight className="h-3.5 w-3.5" />
-                      </span>
-
+                    <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
                       {project.githubUrl && (
                         <a
                           href={project.githubUrl}
@@ -148,7 +132,7 @@ export function ProjectsSection() {
                             handleIconHover("View source on GitHub", e)
                           }
                           onMouseLeave={handleIconLeave}
-                          className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+                          className="flex h-[1.375rem] w-[1.375rem] items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary sm:h-6 sm:w-6"
                         >
                           <FiGithub className="h-3.5 w-3.5" />
                         </a>
@@ -164,7 +148,7 @@ export function ProjectsSection() {
                             handleIconHover("Visit live site", e)
                           }
                           onMouseLeave={handleIconLeave}
-                          className="flex h-6 w-6 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary"
+                          className="flex h-[1.375rem] w-[1.375rem] items-center justify-center rounded-md text-text-muted transition-colors hover:bg-surface-hover hover:text-text-primary sm:h-6 sm:w-6"
                         >
                           <FiExternalLink className="h-3.5 w-3.5" />
                         </a>
@@ -191,10 +175,10 @@ export function ProjectsSection() {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className=" px-4 pb-4 space-y-3">
+                    <div className="space-y-2.5 pr-3 pb-3 pl-12 sm:space-y-3 sm:pr-4 sm:pb-4 sm:pl-[3.75rem]">
                       {/* Full description */}
                       {project.description.length > 0 && (
-                        <p className="text-xs leading-relaxed text-text-secondary">
+                        <p className="text-[11px] leading-relaxed text-text-secondary sm:text-xs">
                           {project.description}
                         </p>
                       )}
@@ -205,7 +189,7 @@ export function ProjectsSection() {
                           {project.highlights.map((highlight, i) => (
                             <li
                               key={i}
-                              className="text-xs leading-relaxed text-text-secondary"
+                              className="text-[11px] leading-relaxed text-text-secondary sm:text-xs"
                             >
                               {highlight}
                             </li>
@@ -218,7 +202,7 @@ export function ProjectsSection() {
               </AnimatePresence>
 
               {/* Tech badges - always visible */}
-              <div className="flex flex-wrap gap-1 px-4 pb-3 -mt-1">
+              <div className="-mt-1 flex flex-wrap gap-1 pr-3 pb-2.5 pl-12 sm:pr-4 sm:pb-3 sm:pl-[3.75rem]">
                 {project.technologies.map((tech) => (
                   <TechBadge key={tech} name={tech} />
                 ))}
@@ -247,7 +231,7 @@ export function ProjectsSection() {
                   exit={{ opacity: 0, y: 4, scale: 0.95 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
                 >
-                  <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-xs shadow-lg">
+                  <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-[11px] shadow-lg sm:text-xs">
                     <span className="font-medium text-text-primary">
                       {hovered.label}
                     </span>

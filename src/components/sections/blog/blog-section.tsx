@@ -17,19 +17,19 @@ export function BlogSection() {
           <TransitionLink
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex items-start gap-4 px-4 py-4 transition-colors hover:bg-surface screen-line-after"
+            className="group flex items-start gap-3 px-3 py-3 transition-colors hover:bg-surface screen-line-after sm:gap-4 sm:px-4 sm:py-4"
           >
             {/* Date */}
-            <time className="shrink-0 pt-0.5 font-mono text-xs text-text-muted tabular-nums">
+            <time className="shrink-0 pt-0.5 font-mono text-[11px] text-text-muted tabular-nums sm:text-xs">
               {formatDate(post.date)}
             </time>
 
             {/* Content */}
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">
+              <h3 className="text-xs font-medium text-text-primary group-hover:text-accent transition-colors sm:text-sm">
                 {post.title}
               </h3>
-              <p className="mt-1 text-xs leading-relaxed text-text-secondary line-clamp-2">
+              <p className="mt-1 text-[11px] leading-relaxed text-text-secondary line-clamp-2 sm:text-xs">
                 {post.description}
               </p>
               {post.tags.length > 0 && (
@@ -37,7 +37,7 @@ export function BlogSection() {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-surface px-2 py-0.5 text-[10px] font-medium text-text-muted"
+                      className="bg-surface px-2 py-0.5 text-[9px] font-medium text-text-muted sm:text-[10px]"
                     >
                       {tag}
                     </span>
@@ -53,10 +53,10 @@ export function BlogSection() {
       </div>
 
       {/* View all link */}
-      <div className="px-4 py-3 screen-line-after">
+      <div className="px-3 py-2.5 screen-line-after sm:px-4 sm:py-3">
         <TransitionLink
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary transition-colors hover:text-accent"
+          className="inline-flex items-center gap-1.5 text-[11px] font-medium text-text-secondary transition-colors hover:text-accent sm:text-xs"
         >
           All posts
           <FiArrowRight className="h-3 w-3" />

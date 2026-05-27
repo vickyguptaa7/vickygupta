@@ -14,69 +14,39 @@ import { HonorsSection } from "@/components/sections/honors/honors-section";
 import { ProjectsSection } from "@/components/sections/projects/projects-section";
 import { StackSection } from "@/components/sections/stack/stack-section";
 
+const homeSections = [
+  { id: "about", component: AboutSection, delay: 0 },
+  { id: "experience", component: ExperienceSection, delay: 0 },
+  { id: "projects", component: ProjectsSection, delay: 0 },
+  { id: "stack", component: StackSection, delay: 0 },
+  { id: "github", component: GitHubHeatmapSection, delay: 0.05 },
+  { id: "coding-profiles", component: CodingProfilesSection, delay: 0.05 },
+  { id: "education", component: EducationSection, delay: 0.05 },
+  { id: "certifications", component: CertificationsSection, delay: 0.05 },
+  { id: "honors", component: HonorsSection, delay: 0 },
+  { id: "contact", component: ContactSection, delay: 0 },
+] as const;
+
 export default function Home() {
   return (
     <>
       <SectionNav />
-      <main id="main-content" className="w-full overflow-x-hidden pt-12 mt-4">
-        <div className="mx-auto md:max-w-4xl px-4 ">
+      <main
+        id="main-content"
+        className="mt-3 w-full overflow-x-hidden pt-11 sm:mt-4 sm:pt-12"
+      >
+        <div className="mx-auto px-3 sm:px-4 md:max-w-4xl">
           <HeroSection />
           <Separator />
 
-          <ScrollReveal>
-            <AboutSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal>
-            <ExperienceSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal>
-            <ProjectsSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal>
-            <StackSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal delay={0.05}>
-            <GitHubHeatmapSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal delay={0.05}>
-            <CodingProfilesSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal delay={0.05}>
-            <EducationSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal delay={0.05}>
-            <CertificationsSection />
-          </ScrollReveal>
-          <Separator />
-
-          <ScrollReveal>
-            <HonorsSection />
-          </ScrollReveal>
-          <Separator />
-
-          {/* <ScrollReveal delay={0.05}>
-            <BlogSection />
-          </ScrollReveal>
-          <Separator /> */}
-
-          <ScrollReveal>
-            <ContactSection />
-          </ScrollReveal>
-          <Separator />
+          {homeSections.map(({ id, component: Component, delay }) => (
+            <div key={id}>
+              <ScrollReveal delay={delay}>
+                <Component />
+              </ScrollReveal>
+              <Separator />
+            </div>
+          ))}
 
           <Footer />
           <Separator />

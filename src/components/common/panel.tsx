@@ -28,7 +28,10 @@ export function PanelHeader({
   ...props
 }: PanelHeaderProps) {
   return (
-    <header className={cn("screen-line-after px-4", className)} {...props}>
+    <header
+      className={cn("screen-line-after px-3 sm:px-4", className)}
+      {...props}
+    >
       {children}
     </header>
   );
@@ -41,7 +44,10 @@ interface PanelTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 export function PanelTitle({ className, children, ...props }: PanelTitleProps) {
   return (
     <h2
-      className={cn("text-2xl font-semibold tracking-tight", className)}
+      className={cn(
+        "text-xl font-semibold tracking-tight sm:text-2xl",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -61,7 +67,7 @@ export function PanelTitleSup({
   return (
     <sup
       className={cn(
-        "-top-[0.75em] ml-1 text-sm font-medium text-text-muted tabular-nums select-none",
+        "-top-[0.75em] ml-1 text-xs font-medium text-text-muted tabular-nums select-none sm:text-sm",
         className,
       )}
       {...props}
@@ -81,7 +87,7 @@ export function PanelContent({
   ...props
 }: PanelContentProps) {
   return (
-    <div className={cn("p-4", className)} {...props}>
+    <div className={cn("p-3 sm:p-4", className)} {...props}>
       {children}
     </div>
   );

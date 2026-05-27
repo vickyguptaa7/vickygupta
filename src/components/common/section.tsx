@@ -27,7 +27,7 @@ export function Section({
 }: SectionProps) {
   return (
     <Panel id={id} className={className}>
-      <PanelHeader className="flex items-baseline gap-1 py-2.5">
+      <PanelHeader className="flex items-baseline gap-1 py-2 sm:py-2.5">
         <PanelTitle>
           {title}
           {count !== undefined && <PanelTitleSup>({count})</PanelTitleSup>}

@@ -9,9 +9,7 @@ const SPRITE_SIZE = 32;
 const NEKO_SPEED = 10;
 const STOP_DISTANCE = 64;
 
-// Classic oneko cat sprite sheet URL
-const ONEKO_SPRITE_URL =
-  "https://raw.githubusercontent.com/adryd325/oneko.js/14bab15a755d0e35cd4ae19c931d96d306f99f42/oneko.gif";
+const ONEKO_SPRITE_URL = "/images/oneko.gif";
 
 // =============================================================================
 // SPRITE SETS — Maps animation names to [col, row] offsets (oneko layout)
@@ -225,25 +223,6 @@ export function CursorPet() {
     el.style.top = `${pos.y - 16}px`;
   }, [handleIdle, setSprite]);
 
-  const onAnimationFrame = useCallback(
-    (timestamp: number) => {
-      const el = nekoRef.current;
-      if (!el || !el.isConnected) return;
-
-      if (!lastFrameRef.current) {
-        lastFrameRef.current = timestamp;
-      }
-
-      if (timestamp - lastFrameRef.current > 100) {
-        lastFrameRef.current = timestamp;
-        frame();
-      }
-
-      animFrameRef.current = window.requestAnimationFrame(onAnimationFrame);
-    },
-    [frame],
-  );
-
   const handleClick = useCallback(() => {
     const animations = ["scratchSelf", "scratchWallN", "scratchWallS"];
     clickAnimTypeRef.current =
@@ -268,7 +247,6 @@ export function CursorPet() {
       return;
     }
 
-    // Use the classic oneko cat sprite sheet
     el.style.backgroundImage = `url(${ONEKO_SPRITE_URL})`;
 
     const checkMobile = () => {
@@ -305,7 +283,23 @@ export function CursorPet() {
     window.addEventListener("resize", handleResize, { passive: true });
     el.addEventListener("click", handleClick);
 
-    animFrameRef.current = window.requestAnimationFrame(onAnimationFrame);
+    const tick = (timestamp: number) => {
+      const currentEl = nekoRef.current;
+      if (!currentEl || !currentEl.isConnected) return;
+
+      if (!lastFrameRef.current) {
+        lastFrameRef.current = timestamp;
+      }
+
+      if (timestamp - lastFrameRef.current > 100) {
+        lastFrameRef.current = timestamp;
+        frame();
+      }
+
+      animFrameRef.current = window.requestAnimationFrame(tick);
+    };
+
+    animFrameRef.current = window.requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -315,7 +309,7 @@ export function CursorPet() {
         window.cancelAnimationFrame(animFrameRef.current);
       }
     };
-  }, [onAnimationFrame, handleClick]);
+  }, [frame, handleClick]);
 
   return (
     <div
@@ -328,8 +322,8 @@ export function CursorPet() {
         pointerEvents: "auto",
         cursor: "pointer",
         imageRendering: "pixelated",
-        left: nekoPosRef.current.x - 16,
-        top: nekoPosRef.current.y - 16,
+        left: 16,
+        top: 16,
         zIndex: 2147483647,
         overflow: "visible",
       }}

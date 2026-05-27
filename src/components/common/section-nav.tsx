@@ -122,7 +122,7 @@ export function SectionNav() {
                       onClick={(e) => handleNavClick(e, link.href)}
                       onPointerDownCapture={(e) => e.stopPropagation()}
                       className={cn(
-                        "relative shrink-0 whitespace-nowrap px-3 py-1.5 text-xs font-medium transition-all select-none",
+                        "relative shrink-0 whitespace-nowrap px-3 py-1.5 text-[11px] font-medium transition-all select-none sm:text-xs",
                         isActive
                           ? "bg-surface text-text-primary"
                           : "text-text-muted hover:text-text-secondary hover:bg-surface/50",

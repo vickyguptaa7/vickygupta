@@ -1,6 +1,7 @@
 import type { IconType } from "react-icons";
 import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import { RiFileUserFill } from "react-icons/ri";
 
 export interface SocialLink {
   name: string;
@@ -20,6 +21,12 @@ export const socialLinks: SocialLink[] = [
     name: "GitHub",
     url: "https://github.com/vickyguptaa7/",
     icon: FaGithubSquare,
+    iconColor: "text-text-primary",
+  },
+  {
+    name: "Resume",
+    url: "https://drive.google.com/file/d/1XY3laHq5E781TUEJ6apap02qkwQRonGT/view?usp=drive_link",
+    icon: RiFileUserFill,
     iconColor: "text-text-primary",
   },
   {

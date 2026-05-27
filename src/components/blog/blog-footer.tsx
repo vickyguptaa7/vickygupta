@@ -14,11 +14,11 @@ const footerNavLinks = [
 export function BlogFooter() {
   return (
     <footer className="border-t border-border/70">
-      <div className="mx-auto max-w-2xl px-4 py-12">
-        <div className="grid gap-10 text-sm sm:grid-cols-[1fr_auto] sm:items-start">
+      <div className="mx-auto max-w-2xl px-3 py-9 sm:px-4 sm:py-12">
+        <div className="grid gap-8 text-xs sm:grid-cols-[1fr_auto] sm:items-start sm:gap-10 sm:text-sm">
           <div className="space-y-6">
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#909092]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#909092] sm:text-xs">
                 Navigate
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-2">
@@ -53,7 +53,7 @@ export function BlogFooter() {
             </div>
 
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#909092]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#909092] sm:text-xs">
                 Connect
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-2">
@@ -78,7 +78,7 @@ export function BlogFooter() {
             </div>
           </div>
 
-          <p className="text-sm text-[#909092]">
+          <p className="text-xs text-[#909092] sm:text-sm">
             © 2026 Vicky Gupta. All rights reserved.
           </p>
         </div>

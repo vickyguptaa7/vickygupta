@@ -15,7 +15,7 @@ export function HonorsSection() {
       id="honors"
       title="Honors & Awards"
       count={honorsData.length}
-      contentClassName="p-0"
+      contentClassName="p-0 sm:p-0"
     >
       <motion.div
         initial="initial"
@@ -33,10 +33,10 @@ export function HonorsSection() {
               href={honor.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-surface"
+              className="group flex items-start gap-2.5 px-3 py-2.5 transition-colors hover:bg-surface sm:gap-3 sm:px-4 sm:py-3.5"
             >
               {/* Icon / Logo */}
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors sm:h-8 sm:w-8 group-hover:-rotate-10 duration-300">
                 {honor.logo ? (
                   <Image
                     src={honor.logo}
@@ -52,15 +52,15 @@ export function HonorsSection() {
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-medium text-text-primary">
+                <h3 className="text-xs font-medium text-text-primary sm:text-sm">
                   {honor.title}
                 </h3>
-                <p className="text-xs text-text-muted">
+                <p className="text-[11px] text-text-muted sm:text-xs">
                   {honor.issuer} · {honor.date}
                 </p>
                 {honor.description && (
                   <ul className="mt-1 marker:text-gray-400">
-                    <li className="text-xs text-text-secondary">
+                    <li className="text-[11px] text-text-secondary sm:text-xs">
                       {honor.description}
                     </li>
                   </ul>

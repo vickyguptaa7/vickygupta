@@ -15,17 +15,17 @@ export function AboutSection() {
         whileInView="animate"
         viewport={{ once: true, margin: "-50px" }}
         variants={staggerContainer}
-        className="space-y-4"
+        className="space-y-3 sm:space-y-4"
       >
         {/* Bio paragraphs */}
         <motion.ul
           variants={staggerItem}
-          className="list-disc pl-4 space-y-3 marker:text-gray-400 font-mono"
+          className="list-disc pl-3.5 space-y-2.5 marker:text-gray-400 font-mono sm:space-y-3 sm:pl-4"
         >
           {aboutData.bio.map((paragraph, i) => (
             <li
               key={i}
-              className="text-[13px] leading-relaxed text-text-secondary"
+              className="text-xs leading-relaxed text-text-secondary sm:text-[13px]"
             >
               {paragraph}
             </li>
@@ -36,7 +36,7 @@ export function AboutSection() {
         {/* {aboutData.featuredProjects &&
           aboutData.featuredProjects.length > 0 && (
             <motion.div variants={staggerItem} className="space-y-2 pt-2">
-              <h3 className="text-xs font-medium uppercase tracking-widest text-text-muted">
+              <h3 className="text-[11px] font-medium uppercase tracking-widest text-text-muted sm:text-xs">
                 Featured
               </h3>
               <div className="space-y-1">
@@ -46,7 +46,7 @@ export function AboutSection() {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between rounded-md border border-edge px-3 py-2.5 text-sm transition-all hover:bg-surface hover:border-accent/30 group"
+                    className="flex items-center justify-between rounded-md border border-edge px-3 py-2.5 text-xs transition-all hover:bg-surface hover:border-accent/30 group sm:text-sm"
                   >
                     <span className="font-medium text-text-primary">
                       {project.name}

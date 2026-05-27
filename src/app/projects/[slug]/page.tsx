@@ -48,14 +48,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const articleHeadingComponents = getArticleHeadingComponents();
 
   return (
-    <main className="w-full overflow-x-hidden pt-12 mt-4 pb-28">
+    <main className="w-full overflow-x-hidden pt-11 mt-3 pb-20 sm:pt-12 sm:mt-4 sm:pb-28">
       <div className="mx-auto md:max-w-3xl">
         {/* Back link */}
         <section className="screen-line-before screen-line-after border-x border-edge">
-          <div className="px-4 py-6">
+          <div className="px-3 py-4 sm:px-4 sm:py-6">
             <TransitionLink
               href="/#projects"
-              className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text-primary"
+              className="inline-flex items-center gap-1.5 text-xs text-text-muted transition-colors hover:text-text-primary sm:text-sm"
             >
               <FiArrowLeft className="h-3.5 w-3.5" />
               All projects
@@ -67,11 +67,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {/* Header */}
         <section className="screen-line-before screen-line-after border-x border-edge">
-          <header className="screen-line-after px-4 py-6">
-            <div className="flex items-center gap-3 mb-2">
+          <header className="screen-line-after px-3 py-4 sm:px-4 sm:py-6">
+            <div className="mb-2 flex items-center gap-2 sm:gap-3">
               {project.status && (
                 <span
-                  className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-medium ${
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-medium sm:text-[10px] ${
                     project.status === "live"
                       ? "bg-green-500/10 text-green-600"
                       : project.status === "building"
@@ -96,27 +96,27 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </span>
               )}
               {project.featured && (
-                <span className="bg-accent/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                <span className="bg-accent/10 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wider text-accent sm:text-[9px]">
                   Featured
                 </span>
               )}
             </div>
 
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary text-balance">
+            <h1 className="text-2xl font-bold tracking-tight text-text-primary text-balance sm:text-3xl">
               {project.title}
             </h1>
 
-            <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+            <p className="mt-2 text-xs text-text-secondary leading-relaxed sm:text-sm">
               {project.description}
             </p>
 
             {/* Action links */}
-            <div className="mt-4 flex items-center gap-2">
+            <div className="mt-3 flex flex-wrap items-center gap-1.5 sm:mt-4 sm:gap-2">
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-accent px-4 py-2 text-sm font-medium text-background transition-all hover:bg-accent/90 active:scale-[0.98]"
+                className="inline-flex items-center gap-2 bg-accent px-3.5 py-1.5 text-xs font-medium text-accent-foreground transition-all hover:bg-accent/90 active:scale-[0.98] sm:px-4 sm:py-2 sm:text-sm"
               >
                 <FiExternalLink className="h-3.5 w-3.5" />
                 Visit Project
@@ -126,7 +126,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-edge px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
+                  className="inline-flex items-center gap-2 border border-edge px-3.5 py-1.5 text-xs font-medium text-text-secondary transition-colors hover:bg-surface hover:text-text-primary sm:px-4 sm:py-2 sm:text-sm"
                 >
                   <FiGithub className="h-3.5 w-3.5" />
                   Source Code
@@ -151,8 +151,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
 
           {/* Tech Stack */}
-          <div className="px-4 py-6 screen-line-after">
-            <h2 className="text-sm font-semibold text-text-primary mb-3">
+          <div className="px-3 py-4 screen-line-after sm:px-4 sm:py-6">
+            <h2 className="text-xs font-semibold text-text-primary mb-3 sm:text-sm">
               Tech Stack
             </h2>
             <div className="flex flex-wrap gap-1.5">
@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {/* MDX Content */}
         <article className="screen-line-before screen-line-after border-x border-edge">
-          <div className="p-4">
+          <div className="p-3 sm:p-4">
             <div className="article-prose font-hanken-grotesk">
               <MDXRemote
                 source={project.content}

@@ -13,16 +13,49 @@
 
 /* === screen-line utilities (full-width horizontal lines) === */
 @utility screen-line-before {
-  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:w-[200vw] before:border-t before:border-dashed before:border-edge;
+  @apply relative before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:z-1 before:w-[100vw] before:border-t before:border-dashed before:border-edge;
+  &::before {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+  }
 }
 
 @utility screen-line-after {
-  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:w-[200vw] after:border-b after:border-dashed after:border-edge;
+  @apply relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:z-1 after:w-[100vw] after:border-b after:border-dashed after:border-edge;
+  &::after {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
 }
 
 /* === Light theme (default) === */
 :root {
   --blog-font-size: 16px;
+
   --background: #ffffff;
   --foreground: #09090b;
 
@@ -37,11 +70,12 @@
 
   /* Borders */
   --border: #e4e4e7;
-  --edge: color-mix(in srgb, #e4e4e7 64%, #ffffff);
+  --edge: color-mix(in srgb, #d8d8d8 64%, #ffffff);
   --border-subtle: #f4f4f5;
 
   /* Accent */
   --accent: #18181b;
+  --accent-foreground: #ffffff;
   --accent-muted: #f4f4f5;
 
   /* MDX typography */
@@ -71,10 +105,11 @@
   --text-muted: #e0e0e0;
 
   --border: #27272a;
-  --edge: color-mix(in srgb, #242424 64%, #141414);
+  --edge: color-mix(in srgb, #b2b2b23a 64%, #141414);
   --border-subtle: #18181b;
 
   --accent: #fafafa;
+  --accent-foreground: #09090b;
   --accent-muted: #27272a;
 
   --mdx-link: #60a5fa;
@@ -95,6 +130,7 @@
   --color-edge: var(--edge);
   --color-border-subtle: var(--border-subtle);
   --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-accent-muted: var(--accent-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

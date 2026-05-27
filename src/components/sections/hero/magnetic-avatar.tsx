@@ -62,7 +62,7 @@ export function MagneticAvatar() {
   }, []);
 
   return (
-    <div className="p-4 flex items-center justify-center">
+    <div className="p-2 flex items-center justify-center sm:p-4">
       <motion.div
         ref={ref}
         onMouseMove={handleMouse}
@@ -92,7 +92,7 @@ export function MagneticAvatar() {
         </AnimatePresence>
 
         {/* Avatar container */}
-        <div className="relative h-36 w-36 rounded-full overflow-hidden border border-edge bg-surface border-dashed">
+        <div className="relative h-24 w-24 rounded-full overflow-hidden border border-edge bg-surface border-dashed sm:h-36 sm:w-36">
           <Image
             src={heroData.avatarUrl}
             alt={heroData.name}

@@ -3,6 +3,7 @@
 import { FiArrowUp } from "react-icons/fi";
 
 import { Panel, PanelContent } from "@/components/common/panel";
+import { TransitionLink } from "@/components/common/page-transition";
 import { VisitorCounter } from "@/components/common/visitor-counter";
 
 import { socialLinks } from "@/constants/social-links";
@@ -14,11 +15,11 @@ export function Footer() {
 
   return (
     <Panel>
-      <PanelContent className="flex flex-col items-center gap-4 py-8">
+      <PanelContent className="flex flex-col items-center gap-3 py-6 sm:gap-4 sm:py-8">
         {/* Back to top */}
         <button
           onClick={scrollToTop}
-          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-xs text-text-muted transition-colors hover:border-accent/30 hover:text-accent cursor-pointer border-dashed"
+          className="group flex items-center gap-1.5 border border-edge px-3 py-1.5 text-[11px] text-text-muted transition-colors hover:border-accent/30 hover:text-accent cursor-pointer border-dashed sm:text-xs"
           aria-label="Back to top"
         >
           <FiArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-0.5" />
@@ -45,14 +46,14 @@ export function Footer() {
         <VisitorCounter />
 
         {/* Attribution */}
-        <p className="font-mono text-xs text-text-muted">
+        <p className="font-mono text-[11px] text-text-muted sm:text-xs">
           Built by{" "}
-          <a
+          <TransitionLink
             href="/"
             className="text-text-secondary transition-colors hover:text-text-primary"
           >
             Vicky Gupta
-          </a>
+          </TransitionLink>
         </p>
       </PanelContent>
     </Panel>

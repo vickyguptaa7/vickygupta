@@ -30,7 +30,16 @@ The `@utility` directive lets you define reusable utility classes right in your 
 
 ```css
 @utility screen-line-before {
-  @apply relative before:absolute before:top-0 before:h-px before:w-[200vw];
+  @apply relative before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:h-px before:w-[100vw];
+  &::before {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
 }
 ```
 

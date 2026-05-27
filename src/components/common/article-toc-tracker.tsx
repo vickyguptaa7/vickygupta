@@ -118,10 +118,10 @@ export function ArticleTocTracker({ headings }: ArticleTocTrackerProps) {
             >
               <span className="flex min-w-0 items-center gap-2">
                 <FiList className="h-4 w-4 shrink-0 text-text-muted" />
-                <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
+                <span className="text-[9px] font-medium uppercase tracking-[0.12em] text-text-muted sm:text-[10px]">
                   Table of contents
                 </span>
-                <span className="truncate text-sm text-text-primary">
+                <span className="truncate text-xs text-text-primary sm:text-sm">
                   {activeHeadingLabel}
                 </span>
               </span>
@@ -150,7 +150,7 @@ export function ArticleTocTracker({ headings }: ArticleTocTrackerProps) {
                         type="button"
                         onClick={() => handleNavigate(heading.id)}
                         className={cn(
-                          "block w-full px-2 py-1.5 text-left text-sm transition-colors",
+                          "block w-full px-2 py-1.5 text-left text-xs transition-colors sm:text-sm",
                           heading.level === 3 && "pl-5",
                           isActive
                             ? "bg-surface font-medium text-text-primary"

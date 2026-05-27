@@ -37,12 +37,12 @@ export function Navbar() {
       )}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="flex h-12 items-center justify-between px-2 mx-4 screen-line-after screen-line-before mt-2  border-edge border-l border-dashed border-r ">
+        <div className="mx-3 mt-2 flex h-11 items-center justify-between px-1.5 screen-line-after screen-line-before border-edge border-l border-dashed border-r sm:mx-4 sm:h-12 sm:px-2">
           {/* Left — Logo */}
           {showImage && (
             <TransitionLink
               href="/"
-              className="font-mono text-sm font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
+              className="font-mono text-xs font-bold tracking-tight text-text-primary transition-colors hover:text-accent sm:text-sm"
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -75,7 +75,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative px-3 py-1.5 text-xs font-medium transition-colors",
+                    "relative px-2.5 py-1.5 text-[11px] font-medium transition-colors sm:px-3 sm:text-xs",
                     isActive
                       ? "text-text-primary"
                       : "text-text-muted hover:text-text-secondary",

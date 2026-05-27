@@ -57,12 +57,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const content = stripLeadingTitleHeading(post.content, post.title);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-16">
-      <div className="space-y-12">
+    <div className="mx-auto max-w-2xl px-3 py-12 sm:px-4 sm:py-16">
+      <div className="space-y-9 sm:space-y-12">
         <div>
           <TransitionLink
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-[#909092] transition-colors hover:text-text-primary"
+            className="inline-flex items-center gap-2 text-xs text-[#909092] transition-colors hover:text-text-primary sm:text-sm"
           >
             <FiArrowLeft className="h-4 w-4" />
             Back to Blog
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         <article className="mx-auto">
-          <header className="mb-8 space-y-6">
+          <header className="mb-6 space-y-5 sm:mb-8 sm:space-y-6">
             {post.image && (
               <div className="relative aspect-video overflow-hidden rounded-lg border border-border/70">
                 <Image
@@ -83,13 +83,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-[#909092]"
+                      className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-[#909092] sm:text-xs"
                     >
                       {tag}
                     </span>
@@ -97,15 +97,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               )}
 
-              <h1 className="text-4xl font-bold leading-tight text-balance text-text-primary lg:text-5xl">
+              <h1 className="text-3xl font-bold leading-tight text-balance text-text-primary sm:text-4xl lg:text-5xl">
                 {post.title}
               </h1>
 
-              <p className="text-xl leading-8 text-[#909092]">
+              <p className="text-lg leading-7 text-[#909092] sm:text-xl sm:leading-8">
                 {post.description}
               </p>
 
-              <div className="flex items-center gap-2 text-sm text-[#909092]">
+              <div className="flex items-center gap-2 text-xs text-[#909092] sm:text-sm">
                 <time dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -142,8 +142,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {relatedPosts.length > 0 && (
           <section className="space-y-6">
             <div className="h-px w-full bg-border/70" />
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold text-text-primary">
+            <div className="space-y-3 sm:space-y-4">
+              <h2 className="text-xl font-semibold text-text-primary sm:text-2xl">
                 Related Posts
               </h2>
               <div className="blog-list">
@@ -159,7 +159,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mb-8 h-px w-full bg-border/70" />
           <TransitionLink
             href="/blog"
-            className="inline-flex items-center justify-center rounded-full bg-text-primary px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-text-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-text-primary px-4 py-2 text-xs font-medium text-background transition-colors hover:bg-text-primary/90 sm:px-5 sm:py-2.5 sm:text-sm"
           >
             View All Blogs
           </TransitionLink>

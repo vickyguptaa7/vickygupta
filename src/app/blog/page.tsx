@@ -15,24 +15,26 @@ function BlogPageFallback() {
   const tags = getAllTags();
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 md:py-10">
-      <section className="space-y-4 pt-2">
-        <div className="space-y-2 pb-4">
-          <h1 className="text-2xl font-bold text-text-primary">Blog</h1>
-          <p className="max-w-xl text-sm leading-6 text-[#909092] md:text-base">
+    <div className="mx-auto max-w-2xl px-3 py-6 sm:px-4 sm:py-8 md:py-10">
+      <section className="space-y-3 pt-2 sm:space-y-4">
+        <div className="space-y-1.5 pb-3 sm:space-y-2 sm:pb-4">
+          <h1 className="text-xl font-bold text-text-primary sm:text-2xl">
+            Blog
+          </h1>
+          <p className="max-w-xl text-xs leading-5 text-[#909092] sm:text-sm sm:leading-6 md:text-base">
             Thoughts, tutorials, and insights on engineering and programming.
           </p>
         </div>
 
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            <span className="rounded-full bg-text-primary px-3 py-1.5 text-sm font-medium text-background">
+            <span className="rounded-full bg-text-primary px-3 py-1.5 text-xs font-medium text-background sm:text-sm">
               All
             </span>
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-surface px-3 py-1.5 text-sm font-medium text-[#909092]"
+                className="rounded-full bg-surface px-3 py-1.5 text-xs font-medium text-[#909092] sm:text-sm"
               >
                 {tag}
               </span>

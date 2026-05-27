@@ -25,7 +25,7 @@ export function RotatingTagline() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -14, filter: "blur(4px)" }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute text-sm text-text-muted tracking-wide"
+          className="absolute text-xs text-text-muted tracking-wide sm:text-sm"
         >
           {taglines[index]}
         </motion.span>

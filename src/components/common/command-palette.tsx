@@ -183,11 +183,22 @@ export function CommandPalette() {
     return items;
   }, [grouped]);
 
+  const openPalette = useCallback(() => {
+    setQuery("");
+    setActiveIndex(0);
+    setOpen(true);
+  }, []);
+
+  const closePalette = useCallback(() => {
+    setOpen(false);
+    setQuery("");
+    setActiveIndex(0);
+  }, []);
+
   // Navigate to an item
   const navigateTo = useCallback(
     (item: CommandItem) => {
-      setOpen(false);
-      setQuery("");
+      closePalette();
 
       if (item.href.startsWith("/#")) {
         const sectionId = item.href.slice(2);
@@ -205,7 +216,7 @@ export function CommandPalette() {
         router.push(item.href);
       }
     },
-    [pathname, router],
+    [closePalette, pathname, router],
   );
 
   // Toggle on ⌘K / Ctrl+K
@@ -213,26 +224,23 @@ export function CommandPalette() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setOpen((prev) => !prev);
+        if (open) {
+          closePalette();
+        } else {
+          openPalette();
+        }
       }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [closePalette, open, openPalette]);
 
   // Focus input when opened
   useEffect(() => {
     if (open) {
-      setQuery("");
-      setActiveIndex(0);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
   }, [open]);
-
-  // Reset active index when filtered list changes
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [filtered]);
 
   // Scroll active item into view
   useEffect(() => {
@@ -248,11 +256,17 @@ export function CommandPalette() {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setActiveIndex((prev) => (prev + 1) % flatList.length);
+        if (flatList.length > 0) {
+          setActiveIndex((prev) => (prev + 1) % flatList.length);
+        }
         break;
       case "ArrowUp":
         e.preventDefault();
-        setActiveIndex((prev) => (prev <= 0 ? flatList.length - 1 : prev - 1));
+        if (flatList.length > 0) {
+          setActiveIndex((prev) =>
+            prev <= 0 ? flatList.length - 1 : prev - 1,
+          );
+        }
         break;
       case "Enter":
         e.preventDefault();
@@ -262,8 +276,7 @@ export function CommandPalette() {
         break;
       case "Escape":
         e.preventDefault();
-        setOpen(false);
-        setQuery("");
+        closePalette();
         break;
     }
   };
@@ -283,10 +296,7 @@ export function CommandPalette() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
               className="fixed inset-0 z-100 bg-black/30 backdrop-blur-[2px]"
-              onClick={() => {
-                setOpen(false);
-                setQuery("");
-              }}
+              onClick={closePalette}
             />
 
             {/* Dialog */}
@@ -300,18 +310,21 @@ export function CommandPalette() {
             >
               <div className="w-[90vw] max-w-lg overflow-hidden rounded-lg border border-edge border-dashed bg-background shadow-2xl pointer-events-auto">
                 {/* Search input */}
-                <div className="flex items-center gap-3 border-b border-edge border-dashed px-4 py-3">
+                <div className="flex items-center gap-2.5 border-b border-edge border-dashed px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3">
                   <FiSearch size={16} className="shrink-0 text-text-muted" />
                   <input
                     ref={inputRef}
                     type="text"
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setActiveIndex(0);
+                    }}
                     onKeyDown={handleKeyDown}
                     placeholder="Type a command or search..."
-                    className="flex-1 bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
+                    className="flex-1 bg-transparent text-xs text-text-primary outline-none placeholder:text-text-muted sm:text-sm"
                   />
-                  <kbd className="hidden rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted sm:inline-block">
+                  <kbd className="hidden rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:inline-block sm:text-[10px]">
                     ESC
                   </kbd>
                 </div>
@@ -322,13 +335,13 @@ export function CommandPalette() {
                   className="max-h-[60vh] overflow-y-auto overscroll-contain p-2"
                 >
                   {flatList.length === 0 ? (
-                    <div className="px-3 py-8 text-center text-sm text-text-muted">
+                    <div className="px-3 py-8 text-center text-xs text-text-muted sm:text-sm">
                       No results found.
                     </div>
                   ) : (
                     Object.entries(grouped).map(([group, items]) => (
                       <div key={group} className="mb-1">
-                        <div className="px-3 pb-1.5 pt-2 text-xs font-medium text-text-muted">
+                        <div className="px-3 pb-1.5 pt-2 text-[11px] font-medium text-text-muted sm:text-xs">
                           {group}
                         </div>
                         {items.map((item) => {
@@ -341,7 +354,7 @@ export function CommandPalette() {
                               onClick={() => navigateTo(item)}
                               onMouseEnter={() => setActiveIndex(globalIndex)}
                               className={cn(
-                                "flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors",
+                                "flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-left text-xs transition-colors sm:gap-3 sm:px-3 sm:py-2 sm:text-sm",
                                 isActive
                                   ? "bg-surface text-text-primary"
                                   : "text-text-secondary hover:bg-surface/50",
@@ -357,7 +370,7 @@ export function CommandPalette() {
                               >
                                 {item.icon}
                               </span>
-                              <span className="truncate font-mono text-xs">
+                              <span className="truncate font-mono text-[11px] sm:text-xs">
                                 {item.label}
                               </span>
                             </button>
@@ -369,33 +382,35 @@ export function CommandPalette() {
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between border-t border-edge px-4 py-2">
-                  <span className="text-xs text-text-muted">Go to Page</span>
+                <div className="flex items-center justify-between border-t border-edge px-3 py-1.5 sm:px-4 sm:py-2">
+                  <span className="text-[11px] text-text-muted sm:text-xs">
+                    Go to Page
+                  </span>
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1">
-                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted">
+                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:text-[10px]">
                         ↑
                       </kbd>
-                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted">
+                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:text-[10px]">
                         ↓
                       </kbd>
-                      <span className="ml-0.5 text-[10px] text-text-muted">
+                      <span className="ml-0.5 text-[9px] text-text-muted sm:text-[10px]">
                         Navigate
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted">
+                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:text-[10px]">
                         ↵
                       </kbd>
-                      <span className="ml-0.5 text-[10px] text-text-muted">
+                      <span className="ml-0.5 text-[9px] text-text-muted sm:text-[10px]">
                         Open
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted">
+                      <kbd className="rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:text-[10px]">
                         Esc
                       </kbd>
-                      <span className="ml-0.5 text-[10px] text-text-muted">
+                      <span className="ml-0.5 text-[9px] text-text-muted sm:text-[10px]">
                         Close
                       </span>
                     </div>
@@ -413,12 +428,12 @@ export function CommandPalette() {
     <>
       {/* Trigger button */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={openPalette}
         className="flex items-center justify-center gap-1.5 p-2 text-text-secondary transition-colors hover:bg-surface hover:text-text-primary"
         aria-label="Search (⌘K)"
       >
         <FiSearch size={14} />
-        <kbd className="hidden rounded border border-edge px-1.5 py-0.5 font-mono text-[10px] text-text-muted sm:inline-block">
+        <kbd className="hidden rounded border border-edge px-1.5 py-0.5 font-mono text-[9px] text-text-muted sm:inline-block sm:text-[10px]">
           ⌘K
         </kbd>
       </button>

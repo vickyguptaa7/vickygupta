@@ -28,7 +28,7 @@ export function VisitorCounter() {
   if (count === null) return null;
 
   return (
-    <p className="font-mono text-xs text-text-muted">
+    <p className="font-mono text-[11px] text-text-muted sm:text-xs">
       You are the{" "}
       <span className="font-semibold text-text-secondary tabular-nums">
         {count.toLocaleString()}

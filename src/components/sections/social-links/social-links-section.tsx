@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
 import { staggerContainer, staggerItem } from "@/constants/animation-presets";
@@ -10,36 +9,13 @@ import { cn } from "@/lib/utils";
 
 import { socialLinks } from "@/constants/social-links";
 
-function LiveTime() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-          timeZone: "Asia/Kolkata",
-        }),
-      );
-    };
-    update();
-    const interval = setInterval(update, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return <span>{time || "--:--"}</span>;
-}
-
 export function SocialLinksSection() {
   return (
     <div className="flex flex-col sm:flex-row items-stretch">
       {/* Social Links */}
       <div className="flex-1 min-w-0 screen-line-before">
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3  gap-2"
+          className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 sm:gap-2"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-50px" }}
@@ -53,20 +29,19 @@ export function SocialLinksSection() {
               rel="noopener noreferrer"
               variants={staggerItem}
               className={cn(
-                `flex items-center gap-3 px-4 py-3.5 text-sm hover:bg-surface my-px active:scale-[0.99] sm:border-r sm:border-l border-edge  group border-dashed`,
-                index % 3 == 0 && "sm:border-l-0",
-                index % 3 == 2 && "sm:border-r-0",
-                index % 2 == 0 && "border-r sm:border-r-0",
-                index % 2 == 1 && "border-l sm:border-l-0",
-                (socialLinks.length - 1) / 2 != index / 2 &&
-                  "border-b sm:border-b-0",
-                (socialLinks.length - 1) / 2 == index / 2 &&
-                  "border-t sm:border-t-0",
+                `flex items-center gap-2.5 px-3 py-2.5 text-xs hover:bg-surface my-px active:scale-[0.99] border-edge group border-dashed sm:gap-3 sm:px-4 sm:py-3.5 sm:text-sm`,
+                "sm:border-l sm:border-r",
+                index % 4 == 0 && "sm:border-l-0",
+                index % 4 == 3 && "sm:border-r-0",
+                index % 2 == 0 && "border-r ",
+                index % 2 == 1 && "border-l",
+                index <= 1 && "border-b sm:border-b-0",
+                index >= 2 && "border-t sm:border-t-0",
               )}
             >
               <link.icon
                 className={cn(
-                  "h-6 w-6 border border-dashed border-edge rounded-xs shrink-0 group-hover:border-accent/60  transition-colors",
+                  "h-5 w-5 border border-dashed border-edge rounded-xs shrink-0 group-hover:border-accent/60 group-hover:-rotate-10 duration-300 transition-colors sm:h-6 sm:w-6",
                   link.iconColor || "text-text-primary",
                 )}
               />

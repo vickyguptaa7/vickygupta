@@ -82,7 +82,7 @@ export function GitHubHeatmapSection() {
 
   return (
     <Panel id="github">
-      <PanelHeader className="py-4">
+      <PanelHeader className="py-3 sm:py-4">
         <PanelTitle>GitHub</PanelTitle>
       </PanelHeader>
       <PanelContent>
@@ -93,14 +93,14 @@ export function GitHubHeatmapSection() {
           transition={{ duration: 0.5 }}
         >
           {/* Heatmap grid — scrollable on mobile/tablet only */}
-          <div className="max-md:overflow-x-auto pb-4">
-            <div className="flex gap-[4.5px]">
+          <div className="max-md:overflow-x-auto pb-3 sm:pb-4">
+            <div className="flex gap-1 sm:gap-[4.5px]">
               {weeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-[4.5px]">
+                <div key={wi} className="flex flex-col gap-1 sm:gap-[4.5px]">
                   {week.map((day, di) => (
                     <motion.div
                       key={di}
-                      className="h-[11px] w-[11px] rounded-[2px] cursor-pointer"
+                      className="h-2.5 w-2.5 cursor-pointer rounded-[2px] sm:h-[11px] sm:w-[11px]"
                       style={{
                         backgroundColor: getColor(day.level),
                       }}
@@ -138,7 +138,7 @@ export function GitHubHeatmapSection() {
                       exit={{ opacity: 0, y: 4, scale: 0.95 }}
                       transition={{ duration: 0.15, ease: "easeOut" }}
                     >
-                      <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-xs shadow-lg">
+                      <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-[11px] shadow-lg sm:text-xs">
                         <span className="font-medium text-text-primary">
                           {hovered.day.count}{" "}
                           {hovered.day.count === 1
@@ -162,8 +162,8 @@ export function GitHubHeatmapSection() {
             )}
 
           {/* Legend */}
-          <div className="mt-3 flex items-center justify-between">
-            <p className="text-xs text-text-muted">
+          <div className="mt-2.5 flex items-center justify-between gap-3 sm:mt-3">
+            <p className="text-[11px] text-text-muted sm:text-xs">
               <a
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
@@ -174,12 +174,12 @@ export function GitHubHeatmapSection() {
                 {new Date().getFullYear()}
               </a>
             </p>
-            <div className="flex items-center gap-1.5 text-xs text-text-muted">
+            <div className="flex items-center gap-1 text-[11px] text-text-muted sm:gap-1.5 sm:text-xs">
               <span>Less</span>
               {[0, 1, 2, 3, 4].map((level) => (
                 <div
                   key={level}
-                  className="h-[11px] w-[11px] rounded-[2px] transition-colors duration-200"
+                  className="h-2.5 w-2.5 rounded-[2px] transition-colors duration-200 sm:h-[11px] sm:w-[11px]"
                   style={{ backgroundColor: getColor(level) }}
                 />
               ))}

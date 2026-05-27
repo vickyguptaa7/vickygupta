@@ -30,75 +30,77 @@ export const experiences: Experience[] = [
     isActive: true,
     roles: [
       {
+        title: "Software Engineer",
+        type: "Full-time",
+        period: "05.2026 – Present",
+        highlights: [
+          <>
+            Ramping up on architecture, product context, and team workflows
+            while turning questions into clarity.
+          </>,
+        ],
+        technologies: [
+          "ReactJs",
+          "NextJs",
+          "JavaScript",
+          "TypeScript",
+          "TailwindCSS",
+          "Django",
+          "React Query",
+          "RestAPI",
+        ],
+      },
+      {
         title: "Development Engineer",
         type: "Full-time",
-        period: "06.2024 – Present",
+        period: "06.2024 – 05.2026",
         highlights: [
           <>
             {" "}
-            Delivered a{" "}
+            Led the validation of a{" "}
+            <strong className="font-semibold">GCP risk feature</strong>,ensured
+            accurate
             <strong className="font-semibold">
-              granular risk profile feature
+              vulnerability detection
             </strong>{" "}
-            allowing users to assign{" "}
-            <strong className="font-semibold">
-              dedicated configurations per AWS, Azure, or GCP account
-            </strong>
-            . This replaced monolithic profiles, enabling{" "}
-            <strong className="font-semibold">
-              precise security posture management
-            </strong>{" "}
-            across complex networks.{" "}
+            across
+            <strong className="font-semibold"> VPCs firewall rules </strong>and
+            <strong className="font-semibold">network firewall policies</strong>
+            , supporting standard,{" "}
+            <strong className="font-semibold">custom</strong>, and{" "}
+            <strong className="font-semibold">zone-based</strong> risks.
           </>,
 
           <>
             {" "}
-            Led the validation and release of a{" "}
+            Engineered{" "}
             <strong className="font-semibold">
-              GCP risk assessment feature
+              E2E validation architecture{" "}
             </strong>
-            , ensured{" "}
+            for{" "}
+            <strong className="font-semibold">granular risk profiles</strong>,
+            covering{" "}
             <strong className="font-semibold">
-              accurate vulnerability detection
+              100% of AWS, Azure, and GCP{" "}
+            </strong>
+            configurations during migration from{" "}
+            <strong className="font-semibold">legacy profile</strong>.
+          </>,
+
+          <>
+            Owned{" "}
+            <strong className="font-semibold">
+              core cloud-risk feature automation
+            </strong>
+            , improving reliability to{" "}
+            <strong className="font-semibold">99%</strong> and{" "}
+            <strong className="font-semibold">
+              reducing manual release validation effort by 80%
             </strong>{" "}
-            across GCP VPCs firewall rules and network firewall policies,
-            supporting <strong>standard, custom, and zone-based risks</strong>
-            .{" "}
-          </>,
-
-          <>
-            {" "}
-            Drove end-to-end testing for a{" "}
-            <strong className="font-semibold">
-              dynamic, tenant-specific logging architecture
-            </strong>
-            , validated XML-based controls that{" "}
-            <strong className="font-semibold">
-              slashed production log volume
-            </strong>
-            —dropping microservice logs{" "}
-            <strong className="font-semibold">from 102k to 8k</strong> and{" "}
-            <strong className="font-semibold">80k to 4.5k</strong> reducing
-            storage noise and{" "}
-            <strong className="font-semibold">
-              extending log retention to a full month
-            </strong>
-            .{" "}
-          </>,
-
-          <>
-            {" "}
-            Owned the end-to-end testing infrastructure for these features,
-            maintaining a strict{" "}
-            <strong className="font-semibold">98% automation pass rate</strong>.
-            Conducted{" "}
-            <strong className="font-semibold">deep root-cause analysis</strong>{" "}
-            on complex system bugs and continuously refactored automation suites
-            to <strong>eliminate flaky tests</strong> and ensure reliable
-            delivery.{" "}
+            across distributed microservice workflows.
           </>,
         ],
-        technologies: ["Java", "AWS", "Azure", "GCP", "Kubernetes", "Jenkins"],
+        technologies: ["AWS", "Azure", "GCP", "Java", "Kubernetes", "Jenkins"],
       },
     ],
   },
@@ -128,8 +130,8 @@ export const experiences: Experience[] = [
           </>,
           <>
             Architected{" "}
-            <strong className="font-semibold">"Arena Battle"</strong> a gamified
-            coding competition and{" "}
+            <strong className="font-semibold">&quot;Arena Battle&quot;</strong>{" "}
+            a gamified coding competition and{" "}
             <strong className="font-semibold">interactive problem page</strong>,
             directly driving a{" "}
             <strong className="font-semibold">
