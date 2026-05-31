@@ -27,6 +27,7 @@ export function CodingProfilesSection() {
       if (index === 2) return ["right", "top"];
       if (index === 3) return ["left", "top"];
     }
+    return ["none"];
   }
   return (
     <Section
