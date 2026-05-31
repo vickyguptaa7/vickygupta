@@ -4,12 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelTitle,
-} from "@/components/common/panel";
+import { Section } from "@/components/common/section";
 import { useGitHubContributions } from "@/hooks/queries/use-github-contributions";
 import { GITHUB_USERNAME } from "@/services/api/github";
 import { useThemeStore } from "@/store/theme/theme-store";
@@ -81,113 +76,108 @@ export function GitHubHeatmapSection() {
   const handleCellLeave = useCallback(() => setHovered(null), []);
 
   return (
-    <Panel id="github">
-      <PanelHeader className="py-3 sm:py-4">
-        <PanelTitle>GitHub</PanelTitle>
-      </PanelHeader>
-      <PanelContent>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Heatmap grid — scrollable on mobile/tablet only */}
-          <div className="max-md:overflow-x-auto pb-3 sm:pb-4">
-            <div className="flex gap-1 sm:gap-[4.5px]">
-              {weeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-1 sm:gap-[4.5px]">
-                  {week.map((day, di) => (
-                    <motion.div
-                      key={di}
-                      className="h-2.5 w-2.5 cursor-pointer rounded-[2px] sm:h-[11px] sm:w-[11px]"
-                      style={{
-                        backgroundColor: getColor(day.level),
-                      }}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 20,
-                      }}
-                      onMouseEnter={(e) => handleCellHover(day, e)}
-                      onMouseLeave={handleCellLeave}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tooltip rendered via portal to escape all overflow containers */}
-          {typeof document !== "undefined" &&
-            createPortal(
-              <AnimatePresence>
-                {hovered && (
-                  <div
-                    className="pointer-events-none fixed z-[9999]"
+    <Section id="github" title="GitHub">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Heatmap grid — scrollable on mobile/tablet only */}
+        <div className="max-md:overflow-x-auto pb-3 sm:pb-4">
+          <div className="flex gap-1 sm:gap-[4.5px]">
+            {weeks.map((week, wi) => (
+              <div key={wi} className="flex flex-col gap-1 sm:gap-[4.5px]">
+                {week.map((day, di) => (
+                  <motion.div
+                    key={di}
+                    className="h-2.5 w-2.5 cursor-pointer rounded-[2px] sm:h-[11px] sm:w-[11px]"
                     style={{
-                      left: hovered.x,
-                      top: hovered.y,
-                      transform: "translate(-50%, -100%)",
+                      backgroundColor: getColor(day.level),
                     }}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, y: 4, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 4, scale: 0.95 }}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
-                    >
-                      <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-[11px] shadow-lg sm:text-xs">
-                        <span className="font-medium text-text-primary">
-                          {hovered.day.count}{" "}
-                          {hovered.day.count === 1
-                            ? "contribution"
-                            : "contributions"}
-                        </span>
-                        <span className="text-text-muted"> on </span>
-                        <span className="text-text-secondary">
-                          {formatDisplayDate(hovered.day.date)}
-                        </span>
-                        {/* Caret */}
-                        <div className="absolute left-1/2 -bottom-[5px] -translate-x-1/2">
-                          <div className="h-[6px] w-[6px] rotate-45 border-b border-r border-edge bg-background" />
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                )}
-              </AnimatePresence>,
-              document.body,
-            )}
-
-          {/* Legend */}
-          <div className="mt-2.5 flex items-center justify-between gap-3 sm:mt-3">
-            <p className="text-[11px] text-text-muted sm:text-xs">
-              <a
-                href={`https://github.com/${GITHUB_USERNAME}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-accent"
-              >
-                {totalContributions.toLocaleString()} contributions in{" "}
-                {new Date().getFullYear()}
-              </a>
-            </p>
-            <div className="flex items-center gap-1 text-[11px] text-text-muted sm:gap-1.5 sm:text-xs">
-              <span>Less</span>
-              {[0, 1, 2, 3, 4].map((level) => (
-                <div
-                  key={level}
-                  className="h-2.5 w-2.5 rounded-[2px] transition-colors duration-200 sm:h-[11px] sm:w-[11px]"
-                  style={{ backgroundColor: getColor(level) }}
-                />
-              ))}
-              <span>More</span>
-            </div>
+                    whileHover={{ scale: 1.1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 20,
+                    }}
+                    onMouseEnter={(e) => handleCellHover(day, e)}
+                    onMouseLeave={handleCellLeave}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
-        </motion.div>
-      </PanelContent>
-    </Panel>
+        </div>
+
+        {/* Tooltip rendered via portal to escape all overflow containers */}
+        {typeof document !== "undefined" &&
+          createPortal(
+            <AnimatePresence>
+              {hovered && (
+                <div
+                  className="pointer-events-none fixed z-[9999]"
+                  style={{
+                    left: hovered.x,
+                    top: hovered.y,
+                    transform: "translate(-50%, -100%)",
+                  }}
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 4, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                  >
+                    <div className="mb-1.5 whitespace-nowrap rounded-md border border-edge bg-background px-2.5 py-1.5 text-[11px] shadow-lg sm:text-xs">
+                      <span className="font-medium text-text-primary">
+                        {hovered.day.count}{" "}
+                        {hovered.day.count === 1
+                          ? "contribution"
+                          : "contributions"}
+                      </span>
+                      <span className="text-text-muted"> on </span>
+                      <span className="text-text-secondary">
+                        {formatDisplayDate(hovered.day.date)}
+                      </span>
+                      {/* Caret */}
+                      <div className="absolute left-1/2 -bottom-[5px] -translate-x-1/2">
+                        <div className="h-[6px] w-[6px] rotate-45 border-b border-r border-edge bg-background" />
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>,
+            document.body,
+          )}
+
+        {/* Legend */}
+        <div className="mt-2.5 flex items-center justify-between gap-3 sm:mt-3">
+          <p className="text-[11px] text-text-muted sm:text-xs">
+            <a
+              href={`https://github.com/${GITHUB_USERNAME}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              {totalContributions.toLocaleString()} contributions in{" "}
+              {new Date().getFullYear()}
+            </a>
+          </p>
+          <div className="flex items-center gap-1 text-[11px] text-text-muted sm:gap-1.5 sm:text-xs">
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((level) => (
+              <div
+                key={level}
+                className="h-2.5 w-2.5 rounded-[2px] transition-colors duration-200 sm:h-[11px] sm:w-[11px]"
+                style={{ backgroundColor: getColor(level) }}
+              />
+            ))}
+            <span>More</span>
+          </div>
+        </div>
+      </motion.div>
+    </Section>
   );
 }

@@ -37,7 +37,7 @@ function PortfolioContainer() {
       <SectionNav />
       <main
         id="main-content"
-        className="mt-3 w-full overflow-x-hidden pt-11 sm:mt-4 sm:pt-12"
+        className="mt-3 w-full overflow-x-hidden px-3 sm:px-0 pt-11 sm:mt-4 sm:pt-12"
       >
         <HeroSection />
         <Separator />

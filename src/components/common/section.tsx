@@ -26,10 +26,7 @@ export function Section({
   contentClassName,
 }: SectionProps) {
   return (
-    <Panel
-      id={id}
-      className={cn("mx-auto md:max-w-4xl w-full flex-1", className)}
-    >
+    <Panel id={id} className={cn("md:max-w-4xl w-full flex-1", className)}>
       {title && (
         <PanelHeader className="flex items-baseline gap-1 py-2 sm:py-2.5">
           <PanelTitle>

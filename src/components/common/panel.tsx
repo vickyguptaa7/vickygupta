@@ -8,15 +8,24 @@ interface PanelProps extends React.HTMLAttributes<HTMLElement> {
 export function Panel({ className, children, ...props }: PanelProps) {
   return (
     <div className="flex h-full">
-      <SpotlightCard sides={["top", "bottom"]} className="h-full flex-1">
+      <SpotlightCard
+        sides={["top", "bottom"]}
+        containerClassName="hidden md:flex flex-1"
+      >
         {null}
       </SpotlightCard>
-      <SpotlightCard className={className} containerClassName={className}>
-        <section className={cn("w-full", className)} {...props}>
-          {children}
-        </section>
-      </SpotlightCard>
-      <SpotlightCard sides={["top", "bottom"]} className="h-full flex-1">
+      <div className="max-w-[calc(896px-2rem)] w-full mx-auto">
+        <SpotlightCard className={className} containerClassName={cn(className)}>
+          <section className={cn("w-full", className)} {...props}>
+            {children}
+          </section>
+        </SpotlightCard>
+      </div>
+      <SpotlightCard
+        sides={["top", "bottom"]}
+        containerClassName="hidden md:flex flex-1"
+        className=""
+      >
         {null}
       </SpotlightCard>
     </div>

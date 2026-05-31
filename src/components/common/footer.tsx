@@ -2,11 +2,11 @@
 
 import { FiArrowUp } from "react-icons/fi";
 
-import { Panel, PanelContent } from "@/components/common/panel";
 import { TransitionLink } from "@/components/common/page-transition";
 import { VisitorCounter } from "@/components/common/visitor-counter";
 
 import { socialLinks } from "@/constants/social-links";
+import { Section } from "./section";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -14,8 +14,8 @@ export function Footer() {
   };
 
   return (
-    <Panel>
-      <PanelContent className="flex flex-col items-center gap-3 py-6 sm:gap-4 sm:py-8">
+    <Section id="footer">
+      <div className="flex flex-col items-center gap-3 py-6 sm:gap-4 sm:py-8">
         {/* Back to top */}
         <button
           onClick={scrollToTop}
@@ -55,7 +55,7 @@ export function Footer() {
             Vicky Gupta
           </TransitionLink>
         </p>
-      </PanelContent>
-    </Panel>
+      </div>
+    </Section>
   );
 }
