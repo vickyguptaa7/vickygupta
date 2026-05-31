@@ -10,7 +10,7 @@ import {
 
 interface SectionProps {
   id: string;
-  title: string;
+  title?: string;
   count?: number;
   children: React.ReactNode;
   className?: string;
@@ -26,13 +26,18 @@ export function Section({
   contentClassName,
 }: SectionProps) {
   return (
-    <Panel id={id} className={className}>
-      <PanelHeader className="flex items-baseline gap-1 py-2 sm:py-2.5">
-        <PanelTitle>
-          {title}
-          {count !== undefined && <PanelTitleSup>({count})</PanelTitleSup>}
-        </PanelTitle>
-      </PanelHeader>
+    <Panel
+      id={id}
+      className={cn("mx-auto md:max-w-4xl w-full flex-1", className)}
+    >
+      {title && (
+        <PanelHeader className="flex items-baseline gap-1 py-2 sm:py-2.5">
+          <PanelTitle>
+            {title}
+            {count !== undefined && <PanelTitleSup>({count})</PanelTitleSup>}
+          </PanelTitle>
+        </PanelHeader>
+      )}
       <PanelContent className={cn(contentClassName)}>{children}</PanelContent>
     </Panel>
   );

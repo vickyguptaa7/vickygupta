@@ -6,6 +6,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 import { Section } from "@/components/common/section";
 
+import { SpotlightCard } from "@/components/common/Spotlight";
 import { staggerContainer, staggerItem } from "@/constants/animation-presets";
 import { honorsData } from "@/constants/honors";
 
@@ -23,55 +24,55 @@ export function HonorsSection() {
         viewport={{ once: true, margin: "-50px" }}
         variants={staggerContainer}
       >
-        {honorsData.map((honor) => (
-          <motion.div
-            key={honor.title}
-            variants={staggerItem}
-            className="screen-line-after"
-          >
-            <a
-              href={honor.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-start gap-2.5 px-3 py-2.5 transition-colors hover:bg-surface sm:gap-3 sm:px-4 sm:py-3.5"
+        {honorsData.map((honor, index) => (
+          <motion.div key={honor.title} variants={staggerItem}>
+            <SpotlightCard
+              sides={[honorsData?.length - 1 === index ? "none" : "bottom"]}
             >
-              {/* Icon / Logo */}
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors sm:h-8 sm:w-8 group-hover:-rotate-10 duration-300">
-                {honor.logo ? (
-                  <Image
-                    src={honor.logo}
-                    alt={`${honor.issuer} logo`}
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
-                ) : (
-                  <honor.icon className="h-3.5 w-3.5" />
-                )}
-              </div>
+              <a
+                href={honor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-2.5 px-3 py-2.5 transition-colors sm:gap-3 sm:px-4 sm:py-3.5"
+              >
+                {/* Icon / Logo */}
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-dashed border-edge bg-surface text-text-muted overflow-hidden group-hover:border-accent/20 transition-colors sm:h-8 sm:w-8 group-hover:-rotate-10 duration-300">
+                  {honor.logo ? (
+                    <Image
+                      src={honor.logo}
+                      alt={`${honor.issuer} logo`}
+                      width={20}
+                      height={20}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <honor.icon className="h-3.5 w-3.5" />
+                  )}
+                </div>
 
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <h3 className="text-xs font-medium text-text-primary sm:text-sm">
-                  {honor.title}
-                </h3>
-                <p className="text-[11px] text-text-muted sm:text-xs">
-                  {honor.issuer} · {honor.date}
-                </p>
-                {honor.description && (
-                  <ul className="mt-1 marker:text-gray-400">
-                    <li className="text-[11px] text-text-secondary sm:text-xs">
-                      {honor.description}
-                    </li>
-                  </ul>
-                )}
-              </div>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xs font-medium text-text-primary sm:text-sm">
+                    {honor.title}
+                  </h3>
+                  <p className="text-[11px] text-text-muted sm:text-xs">
+                    {honor.issuer} · {honor.date}
+                  </p>
+                  {honor.description && (
+                    <ul className="mt-1 marker:text-gray-400">
+                      <li className="text-[11px] text-text-secondary sm:text-xs">
+                        {honor.description}
+                      </li>
+                    </ul>
+                  )}
+                </div>
 
-              {/* Link */}
-              {honor.url && (
-                <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-accent group-hover:opacity-100 group-hover:rotate-45 duration-300" />
-              )}
-            </a>
+                {/* Link */}
+                {honor.url && (
+                  <FiArrowUpRight className="ml-auto h-3.5 w-3.5 text-text-muted opacity-80 group-hover:text-accent group-hover:opacity-100 group-hover:rotate-45 duration-300" />
+                )}
+              </a>
+            </SpotlightCard>
           </motion.div>
         ))}
       </motion.div>

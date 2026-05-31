@@ -34,8 +34,7 @@ export function CopyableChip({
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ scale: 1.04 }}
-      className="group/chip inline-flex items-center gap-1.5 border border-edge border-dashed bg-surface/50 px-2.5 py-1 text-[11px] text-text-secondary transition-colors group sm:text-xs"
+      className="group/chip inline-flex items-center gap-1.5 border border-edge border-dashed bg-surface/50 px-2.5 py-1 text-[11px] text-text-secondary transition-colors group sm:text-xs hover:border-accent/60 duration-300"
     >
       <a
         href={href}

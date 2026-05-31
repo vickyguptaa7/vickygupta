@@ -13,7 +13,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!isBlogRoute && <Navbar />}
-      {!isBlogRoute && <CursorPet />}
+      {/* {!isBlogRoute && <CursorPet />} */}
       <PageContent>{children}</PageContent>
     </>
   );

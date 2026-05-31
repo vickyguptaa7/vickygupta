@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { SpotlightCard } from "./Spotlight";
 
 interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
@@ -6,15 +7,19 @@ interface PanelProps extends React.HTMLAttributes<HTMLElement> {
 
 export function Panel({ className, children, ...props }: PanelProps) {
   return (
-    <section
-      className={cn(
-        "screen-line-before screen-line-after border-x border-edge border-dashed",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </section>
+    <div className="flex h-full">
+      <SpotlightCard sides={["top", "bottom"]} className="h-full flex-1">
+        {null}
+      </SpotlightCard>
+      <SpotlightCard className={className} containerClassName={className}>
+        <section className={cn("w-full", className)} {...props}>
+          {children}
+        </section>
+      </SpotlightCard>
+      <SpotlightCard sides={["top", "bottom"]} className="h-full flex-1">
+        {null}
+      </SpotlightCard>
+    </div>
   );
 }
 
@@ -28,12 +33,11 @@ export function PanelHeader({
   ...props
 }: PanelHeaderProps) {
   return (
-    <header
-      className={cn("screen-line-after px-3 sm:px-4", className)}
-      {...props}
-    >
-      {children}
-    </header>
+    <SpotlightCard sides={["bottom"]}>
+      <header className={cn("px-3 sm:px-4", className)} {...props}>
+        {children}
+      </header>
+    </SpotlightCard>
   );
 }
 
